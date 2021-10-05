@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/AltarChase/Scenes/Offline.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/AltarChase/Scenes/Online.unity
+    guid: 047110842c414cc4dab2f8d94bda42df
   m_configObjects: {}
