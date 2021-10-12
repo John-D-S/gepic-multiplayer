@@ -1,3 +1,5 @@
+using kcp2k;
+
 using Mirror;
 
 using System;
@@ -35,11 +37,25 @@ namespace AltarChase
 		private void OnClickConnect()
 		{
 			string address = inputField.text;
+			ushort port = 7777;
+			//if the address contains a colon, it has a port
+			if(address.Contains(":"))
+			{
+				//get everything after the colon
+				string portID = address.Substring(address.IndexOf(":", StringComparison.Ordinal) + 1);
+				//turn it into a port
+				port = ushort.Parse(portID);
+				//remove the port from the address
+				address = address.Substring(0, address.IndexOf(":", StringComparison.Ordinal));
+			}
+			
 			if(!IPAddress.TryParse(address, out IPAddress ipAddress))
 			{
+				Debug.LogError($"Invalid IP: {address}");
 				address = "localhost";
 			}
-
+			
+			((KcpTransport)Transport.activeTransport).Port = port;
 			networkManager.networkAddress = address;
 			networkManager.StartClient();
 		}
