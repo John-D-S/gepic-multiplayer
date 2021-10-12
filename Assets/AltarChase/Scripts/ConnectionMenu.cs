@@ -3,6 +3,7 @@ using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 
 using TMPro;
 
@@ -34,7 +35,7 @@ namespace AltarChase
 		private void OnClickConnect()
 		{
 			string address = inputField.text;
-			if(string.IsNullOrEmpty(address))
+			if(!IPAddress.TryParse(address, out IPAddress ipAddress))
 			{
 				address = "localhost";
 			}
