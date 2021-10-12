@@ -20,6 +20,7 @@ namespace AltarChase.Player
         private Vector3 movementDirection;
 
         //todo Add Animator for movement animations.
+        // todo MOBILE INPUT
 
         // Start is called before the first frame update
         void Start()
