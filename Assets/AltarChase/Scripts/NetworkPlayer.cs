@@ -9,14 +9,48 @@ using Random = UnityEngine.Random;
 
 namespace AltarChase.Networking
 {
-
 	[RequireComponent(typeof(PlayerController))]
 	public class NetworkPlayer : NetworkBehaviour
 	{
 		[SerializeField] private GameObject enemyToSpawn;
+		[SyncVar(hook = nameof(OnSetColor)), SerializeField] private Color cubeColor;
 
+		//rider doesn't recognise this as a serilizable type but it is
+		[SerializeField] private SyncList<float> synchedFloats = new SyncList<float>();
+
+		// SyncVarHooks get called in the order the VARIABLES are defined not the functions
+		// In this case it is x, y, z not z, x, y
+		// [SyncVar(hook = "SetX")] public float x;
+		// [SyncVar(hook = "SetY")] public float y;
+		// [SyncVar(hook = "SetZ")] public float z;
+		//
+		// [Command]
+		// public void CmdSetPosition(float _x, float _y, float _z)
+		// {
+		//     z = _z;
+		//     x = _x;
+		//     y = _y;
+		// }
+		
+		private Material cachedMaterial;
+		
+		//synchVarHooks typically have an On at the front of them
+		private void OnSetColor(Color _old, Color _new)
+		{
+			if(cachedMaterial == null)
+			{
+				cachedMaterial = gameObject.GetComponent<MeshRenderer>().material;
+			}
+
+			cachedMaterial.color = _new;
+		}
+		
 		private void Update()
 		{
+			Debug.Log(synchedFloats);
+			MeshRenderer render = gameObject.GetComponent<MeshRenderer>();
+			render.material.color = cubeColor;
+			
 			// First determine if this function is being run on the local player
 			if(isLocalPlayer)
 			{
@@ -42,6 +76,7 @@ namespace AltarChase.Networking
 			NetworkServer.Spawn(newEnemy);
 		}
 		
+		// Commands shoot from client to server
 		// IMPORTANT - RULES FOR COMMANDS:
 		// 1. Cannot return anything
 		// 2. Must follow the correct naming convention: The function name MUST start with 'Cmd' exactly like that
@@ -51,22 +86,23 @@ namespace AltarChase.Networking
 		public void CmdRandomColor(float _hue)
 		{
 			//this is running on the server
-			RpcRandomColor(_hue);
+			cubeColor = Random.ColorHSV(0, 1, 0.75f, 1, 1, 1);
 		}
 		
+		// client RPCs shoot from server to client
 		// IMPORTANT - RULES FOR CLIENT RPC:
 		// 1. Cannot return anything
 		// 2. Must follow the correct naming convention: The function name MUST start with 'Rpc' exactly like that
 		// 3. The function must have the attribute [ClientRpc] found in the Mirror namespace
 		// 4.Can only be certain serializable types (see Command in the Mirror documentation at https://mirror-networking.gitbook.io/docs/guides/data-types)
-		[ClientRpc]
+		/*[ClientRpc]
 		public void RpcRandomColor(float _hue)
 		{
 			// This is running on every instance of the same object that the client was calling from.
 			// i.e. Red GO on Red Client runs Cmd, Red GO on Red, Green and Blue client's run Rpc
 			MeshRenderer rend = gameObject.GetComponent<MeshRenderer>();
 			rend.material.color = Color.HSVToRGB(_hue, 1, 1);
-		}
+		}*/
 
 		// This is run via the network starting and the player connecting
 		// NOT unity
@@ -87,6 +123,18 @@ namespace AltarChase.Networking
 			// isLocalPlayer is true if this object is the client's local player otherwise it's false
 			PlayerController controller = gameObject.GetComponent<PlayerController>();
 			controller.enabled = isLocalPlayer;
+		}
+
+		
+		// this runs when the server starts... On the server
+		// In the case of a host-client situation, this only runs when the host launches because the host is the server
+		// use this for initializing pooling systems
+		public override void OnStartServer()
+		{
+			for(int i = 0; i < 10; i++)
+			{
+				synchedFloats.Add(Random.Range(0, 10));
+			}
 		}
 	}
 }
