@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6b9db52fa7ca52c42b13a84bbb86ddd5, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -245,14 +245,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c294f6a0be51b04458bb29c68772e794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSize: 5
+  tileSize: 18
   numerOfTiles: 100
   levelTiles:
-  - {fileID: 2198382263061583888, guid: 123c8181ec26c9d40978ca0d8825803a, type: 3}
-  - {fileID: 415454990433953472, guid: 73bc909d55b301d48b240ff4513a85eb, type: 3}
-  - {fileID: 3965192172639163422, guid: 6475c1fb1aa02cb4e9c861d389c103b2, type: 3}
-  - {fileID: 2239446430246617587, guid: eecc3d67ea873c84680f2ce6e6700f2a, type: 3}
-  - {fileID: 4497638107390130589, guid: 11bbb4e10b6272c49b3666a9f2785993, type: 3}
+  - {fileID: 6422296200266479865, guid: d76d23c5bd458ed4ab71c9565382dff5, type: 3}
+  - {fileID: 4080059094868051539, guid: da2e6f1dc489e8647a28ef34db1149e0, type: 3}
+  - {fileID: 8459644507605343092, guid: 063eacea80e68b44f8488b0a1874808b, type: 3}
+  - {fileID: 565724074992383293, guid: 8a6b036b74f0fdb43a46310a645cf6da, type: 3}
+  - {fileID: 1267763560232012499, guid: 9a09007483de95b438d07c2b0b121484, type: 3}
+  - {fileID: 1248717355522891190, guid: 236b8a33ca2c9e5428158419dfab164e, type: 3}
 --- !u!4 &1380800352
 Transform:
   m_ObjectHideFlags: 0
