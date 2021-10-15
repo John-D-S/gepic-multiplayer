@@ -52,22 +52,12 @@ namespace AltarChase.LevelGen
             //set the tiletype of the tile at 000 to the one with the most avilable connections out of availableConnectorDatas.
             levelTilesByGridPos[Vector3Int.zero] = new TempLevelTileData(availableConnectorDatas[availableConnectorDatas.Count - 1], Vector3Int.zero, 0);
             closedPositions.Add(Vector3Int.zero);
+            foreach(Vector3Int connectorPosition in levelTilesByGridPos[closedPositions[0]].ConnectorPositionsOnGrid())
+                openPositions.Enqueue(connectorPosition);
             
             //this loop adds all the tiles that make up the bulk of the maze until it reaches all the tiles that will end up being placed
             while(closedPositions.Count + openPositions.Count < numerOfTiles)
             {
-                foreach(Vector3Int closedPosition in closedPositions)
-                {
-                    foreach(Vector3Int connectorPosition in levelTilesByGridPos[closedPosition].ConnectorPositionsOnGrid())
-                    {
-                        //if the connectorPosition is not already in the list of open or closed positions, add it to the open positions lis
-                        if(!openPositions.Contains(connectorPosition) && !closedPositions.Contains(connectorPosition))
-                        {
-                            openPositions.Enqueue(connectorPosition);
-                        }
-                    }    
-                }
-                
                 Vector3Int positionToFill = openPositions.Dequeue();
                 //add all available connector datas except for the first one (which should be the cap) to this new list
                 List<TileConnectorData> tileDatasToTryPlaceInOrder = availableConnectorDatas.GetRange(1, availableConnectorDatas.Count - 1);
@@ -107,14 +97,20 @@ namespace AltarChase.LevelGen
                     if(tilePlaced)
                         break;
                 }
+                
+                foreach(Vector3Int closedPosition in closedPositions)
+                    foreach(Vector3Int connectorPosition in levelTilesByGridPos[closedPosition].ConnectorPositionsOnGrid())
+                        //if the connectorPosition is not already in the list of open or closed positions, add it to the open positions lis
+                        if(!openPositions.Contains(connectorPosition) && !closedPositions.Contains(connectorPosition))
+                            openPositions.Enqueue(connectorPosition);
             }
             
             //this loop closes off all the open tiles left by the last loop
-            while(openPositions.Count > numerOfTiles)
+            while(openPositions.Count > 0)
             {
                 Vector3Int positionToFill = openPositions.Dequeue();
                 //add all available connector datas in order of the number of connectors each one has
-                List<TileConnectorData> tileDatasToTryPlaceInOrder = availableConnectorDatas.OrderBy(x => x.DefaultConnectorPositions()).ToList();
+                List<TileConnectorData> tileDatasToTryPlaceInOrder = availableConnectorDatas.OrderBy(x => x.NumberOfConnections()).ToList();
 
                 //initialise the new tile that will be placed.
                 TempLevelTileData newTile = new TempLevelTileData(new TileConnectorData(TileShape.Cap), positionToFill, 0);
