@@ -11,110 +11,19 @@ using Random = UnityEngine.Random;
 
 namespace AltarChase.LevelGen
 {
-    public class TempLevelTileData
-    {
-
-        public TileConnectorData connectorData;
-        public Vector3Int position;
-        public int quaterRots;
-        
-        public TempLevelTileData(TileConnectorData _connectorData, Vector3Int _position, int _quaterRots)
-        {
-            connectorData = _connectorData;
-            position = _position;
-            quaterRots = _quaterRots;
-        }
-        
-        /// <summary>
-        /// Returns the given position rotated by 90 degrees about the origin clockwise.
-        /// </summary>
-        public Vector3Int RotIntPosBy90(Vector3Int _pos) => new Vector3Int(_pos.z, _pos.y, -_pos.x);
-        
-        /// <summary>
-        /// returns this tiles' connector positions relative to this tile, if it was rotated by _quaterRots
-        /// </summary>
-        public List<Vector3Int> ConnectorPositionsWithRotation(int _quaterRots)
-        {
-            List<Vector3Int> returnVal = connectorData.DefaultConnectorPositions();
-            //modulo quater rots by 4 so that it stays between 0 and 3
-            int actualQuaterRots = _quaterRots % 4;
-            for(int i = 0; i < returnVal.Count; i++)
-            {
-                for(int j = 0; j < _quaterRots; j++)
-                {
-                    returnVal[i] = RotIntPosBy90(returnVal[i]);
-                }
-            }
-            return returnVal;
-        }
-
-        /// <summary>
-        /// returns the positions of this tile's connection points on the grid
-        /// </summary>
-        public List<Vector3Int> ConnectorPositionsOnGrid()
-        {
-            List<Vector3Int> returnVal = connectorData.DefaultConnectorPositions();
-            for(int i = 0; i < returnVal.Count; i++)
-            {
-                for(int j = 0; j < quaterRots; j++)
-                {
-                    returnVal[i] = RotIntPosBy90(returnVal[i]);
-                }
-            }
-            for(int i = 0; i < returnVal.Count; i++)
-            {
-                returnVal[i] += position;
-            }
-            return returnVal;
-        }
-        
-        public bool TileFitsInPosition(Dictionary<Vector3Int, TempLevelTileData> _currentLevelTiles)
-        {
-            List<Vector3Int> connectorPositons = ConnectorPositionsOnGrid();
-            foreach(Vector3Int connectorPosition in connectorPositons)
-            {
-                if(!_currentLevelTiles.ContainsKey(connectorPosition) || _currentLevelTiles[connectorPosition].ConnectorPositionsOnGrid().Contains(position))
-                {
-                    continue;
-                }
-                return false;
-            }
-            return true;
-        }
-
-        public bool TileFitsInPositionWithNoEmptyConnectors(Dictionary<Vector3Int, TempLevelTileData> _currentLevelTiles)
-        {
-            List<Vector3Int> connectorPositons = ConnectorPositionsOnGrid();
-            foreach(Vector3Int connectorPosition in connectorPositons)
-            {
-                if(!_currentLevelTiles.ContainsKey(connectorPosition))
-                {
-                    return false;
-                }
-                if(_currentLevelTiles[connectorPosition].ConnectorPositionsOnGrid().Contains(position))
-                {
-                    continue;
-                }
-                return false;
-            }
-            return true;
-        }
-    }
-
     public class LevelGenerator : MonoBehaviour
     {
-        [SerializeField] private int numerOfTiles; 
-        
+        [SerializeField] private float tileSize = 10;
+        [SerializeField] private int numerOfTiles = 100;
         [SerializeField] private List<LevelTile> levelTiles;
 
         //use network server.spawn for instantiation.
         //all modules should have a network identity and all module prefabs should be in registered spawnable prefabs in the network manager. 
         private Dictionary<Vector3Int, TempLevelTileData> levelTilesByGridPos = new Dictionary<Vector3Int, TempLevelTileData>();
-
+        
         private Dictionary<TileConnectorData, List<LevelTile>> levelTilesByConnectorData = new Dictionary<TileConnectorData, List<LevelTile>>();
-        //private List<TempLevelTileData> availableTempLevelTileDatas = new List<TempLevelTileData>();
 
-        #region GenerateTiles
+    #region GenerateTiles
         public void GenerateTiles()
         {
             if(levelTiles == null || levelTiles.Count == 0)
@@ -238,7 +147,31 @@ namespace AltarChase.LevelGen
                         break;
                 }
             }
+
+            //set the gameobject of each TempLevelTileData to a be a random one with the appropriate connectionData
+            foreach(KeyValuePair<Vector3Int,TempLevelTileData> tileByGridPos in levelTilesByGridPos)
+            {
+                List<LevelTile> possibleTiles = levelTilesByConnectorData[tileByGridPos.Value.connectorData];
+                tileByGridPos.Value.tileGameObject = possibleTiles[Random.Range(0, possibleTiles.Count)].gameObject;
+            }
         }
     #endregion
+
+        private void PlaceTilesOffline()
+        {
+            foreach(KeyValuePair<Vector3Int,TempLevelTileData> tileByGridPos in levelTilesByGridPos)
+            {
+                TempLevelTileData tileToPlace = tileByGridPos.Value;
+                Vector3 position = transform.position + tileSize * (Vector3)tileByGridPos.Key;
+                Quaternion rotation = Quaternion.Euler(0, tileToPlace.quaterRots * 90, 0);
+                Instantiate(tileToPlace.tileGameObject, position, rotation, transform);
+            }
+        }
+
+        private void Start()
+        {
+            GenerateTiles();
+            PlaceTilesOffline();
+        }
     }    
 }
