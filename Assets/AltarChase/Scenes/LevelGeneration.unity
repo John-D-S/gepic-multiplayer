@@ -216,6 +216,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1380800350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1380800352}
+  - component: {fileID: 1380800351}
+  m_Layer: 0
+  m_Name: levelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1380800351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380800350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c294f6a0be51b04458bb29c68772e794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileSize: 5
+  numerOfTiles: 100
+  levelTiles:
+  - {fileID: 2198382263061583888, guid: 123c8181ec26c9d40978ca0d8825803a, type: 3}
+  - {fileID: 415454990433953472, guid: 73bc909d55b301d48b240ff4513a85eb, type: 3}
+  - {fileID: 3965192172639163422, guid: 6475c1fb1aa02cb4e9c861d389c103b2, type: 3}
+  - {fileID: 2239446430246617587, guid: eecc3d67ea873c84680f2ce6e6700f2a, type: 3}
+  - {fileID: 4497638107390130589, guid: 11bbb4e10b6272c49b3666a9f2785993, type: 3}
+--- !u!4 &1380800352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380800350}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1678940186
 GameObject:
   m_ObjectHideFlags: 0

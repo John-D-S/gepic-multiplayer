@@ -60,17 +60,40 @@ namespace AltarChase.LevelGen
 			}
 			return returnVal;
 		}
-        
+		
+		public List<Vector3Int> AllNeighboringPositionsOnGrid()
+		{
+			List<Vector3Int> returnVal = new List<Vector3Int>();
+			returnVal.Add(Vector3Int.forward + position);
+			returnVal.Add(Vector3Int.right + position);
+			returnVal.Add(Vector3Int.back + position);
+			returnVal.Add(Vector3Int.left + position);
+			return returnVal;
+		}
+		
 		public bool TileFitsInPosition(Dictionary<Vector3Int, TempLevelTileData> _currentLevelTiles)
 		{
 			List<Vector3Int> connectorPositons = ConnectorPositionsOnGrid();
-			foreach(Vector3Int connectorPosition in connectorPositons)
+			List<Vector3Int> allNeighboringPositions = AllNeighboringPositionsOnGrid();
+			foreach(Vector3Int neighboringPosition in allNeighboringPositions)
 			{
-				if(!_currentLevelTiles.ContainsKey(connectorPosition) || _currentLevelTiles[connectorPosition].ConnectorPositionsOnGrid().Contains(position))
+				if(connectorPositons.Contains(neighboringPosition))
 				{
+					if(!_currentLevelTiles.ContainsKey(neighboringPosition) || _currentLevelTiles[neighboringPosition].ConnectorPositionsOnGrid().Contains(position))
+					{
+						continue;
+					}
+					return false;
+				}
+				else
+				{
+					if(_currentLevelTiles.ContainsKey(neighboringPosition) && _currentLevelTiles[neighboringPosition].ConnectorPositionsOnGrid().Contains(position))
+					{
+						return false;
+					}
 					continue;
 				}
-				return false;
+				
 			}
 			return true;
 		}
@@ -78,17 +101,30 @@ namespace AltarChase.LevelGen
 		public bool TileFitsInPositionWithNoEmptyConnectors(Dictionary<Vector3Int, TempLevelTileData> _currentLevelTiles)
 		{
 			List<Vector3Int> connectorPositons = ConnectorPositionsOnGrid();
-			foreach(Vector3Int connectorPosition in connectorPositons)
+			List<Vector3Int> allNeighboringPositions = AllNeighboringPositionsOnGrid();
+			
+			foreach(Vector3Int neighboringPosition in allNeighboringPositions)
 			{
-				if(!_currentLevelTiles.ContainsKey(connectorPosition))
+				if(connectorPositons.Contains(neighboringPosition))
 				{
+					if(!_currentLevelTiles.ContainsKey(neighboringPosition))
+					{
+						return false;
+					}
+					if(_currentLevelTiles[neighboringPosition].ConnectorPositionsOnGrid().Contains(position))
+					{
+						continue;
+					}
 					return false;
 				}
-				if(_currentLevelTiles[connectorPosition].ConnectorPositionsOnGrid().Contains(position))
+				else
 				{
+					if(_currentLevelTiles.ContainsKey(neighboringPosition) && _currentLevelTiles[neighboringPosition].ConnectorPositionsOnGrid().Contains(position))
+					{
+						return false;
+					}
 					continue;
-				}
-				return false;
+				}	
 			}
 			return true;
 		}

@@ -21,7 +21,7 @@ namespace AltarChase.LevelGen
         //all modules should have a network identity and all module prefabs should be in registered spawnable prefabs in the network manager. 
         private Dictionary<Vector3Int, TempLevelTileData> levelTilesByGridPos = new Dictionary<Vector3Int, TempLevelTileData>();
         
-        private Dictionary<TileConnectorData, List<LevelTile>> levelTilesByConnectorData = new Dictionary<TileConnectorData, List<LevelTile>>();
+        private Dictionary<TileShape, List<LevelTile>> levelTilesByConnectorData = new Dictionary<TileShape, List<LevelTile>>();
 
     #region GenerateTiles
         public void GenerateTiles()
@@ -35,13 +35,14 @@ namespace AltarChase.LevelGen
             //add all the leveltiles in levelTiles to the list of available tempLevelTileDatas
             foreach(LevelTile levelTile in levelTiles)
             {
-                levelTilesByConnectorData[levelTile.ConnectorData].Add(levelTile);
+                levelTilesByConnectorData[levelTile.ConnectorData.ThisTileShape] = new List<LevelTile>();
+                levelTilesByConnectorData[levelTile.ConnectorData.ThisTileShape].Add(levelTile);
             }
 
             List<TileConnectorData> availableConnectorDatas = new List<TileConnectorData>();
             foreach(TileShape tileShape in Enum.GetValues(typeof(TileShape)))
             {
-                if(levelTilesByConnectorData.ContainsKey(new TileConnectorData(tileShape)))
+                if(levelTilesByConnectorData.ContainsKey(tileShape))
                     availableConnectorDatas.Add(new TileConnectorData(tileShape));
             }
             
@@ -151,7 +152,7 @@ namespace AltarChase.LevelGen
             //set the gameobject of each TempLevelTileData to a be a random one with the appropriate connectionData
             foreach(KeyValuePair<Vector3Int,TempLevelTileData> tileByGridPos in levelTilesByGridPos)
             {
-                List<LevelTile> possibleTiles = levelTilesByConnectorData[tileByGridPos.Value.connectorData];
+                List<LevelTile> possibleTiles = levelTilesByConnectorData[tileByGridPos.Value.connectorData.ThisTileShape];
                 tileByGridPos.Value.tileGameObject = possibleTiles[Random.Range(0, possibleTiles.Count)].gameObject;
             }
         }

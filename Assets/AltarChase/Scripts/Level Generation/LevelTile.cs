@@ -7,9 +7,7 @@ namespace AltarChase.LevelGen
 {
     public class LevelTile : MonoBehaviour
     {
-        [SerializeField, Tooltip("The size of the tile.")] private float tileWidth;
-
-        private TileConnectorData connectorData;
+        [SerializeField] private TileConnectorData connectorData = new TileConnectorData(TileShape.Cap);
 
         public int QuaterRots
         {
