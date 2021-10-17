@@ -1,11 +1,13 @@
+using Mirror;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AltarChase.LevelGen
-{
-    public class LevelTile : MonoBehaviour
+{   
+    public class LevelTile : NetworkBehaviour
     {
         [SerializeField] private TileConnectorData connectorData = new TileConnectorData(TileShape.Cap);
 

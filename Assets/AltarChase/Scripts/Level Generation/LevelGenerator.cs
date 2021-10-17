@@ -1,17 +1,15 @@
+using Mirror;
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.WSA;
-
 using Random = UnityEngine.Random;
 
 namespace AltarChase.LevelGen
 {
-    public class LevelGenerator : MonoBehaviour
+    public class LevelGenerator : NetworkBehaviour
     {
         [SerializeField] private float tileSize = 10;
         [SerializeField] private int numerOfTiles = 100;
@@ -23,8 +21,11 @@ namespace AltarChase.LevelGen
         
         private Dictionary<TileShape, List<LevelTile>> levelTilesByConnectorData = new Dictionary<TileShape, List<LevelTile>>();
 
+        private List<GameObject> spawnedTiles = new List<GameObject>();
+
     #region GenerateTiles
-        public void GenerateTiles()
+        
+        private void GenerateTiles()
         {
             if(levelTiles == null || levelTiles.Count == 0)
             {
@@ -166,10 +167,40 @@ namespace AltarChase.LevelGen
             }
         }
 
-        private void Start()
+        private void ClearTiles()
         {
+            levelTilesByGridPos.Clear();
+            levelTilesByConnectorData.Clear();
+            foreach(GameObject spawnedTile in spawnedTiles)
+            {
+                NetworkServer.Destroy(spawnedTile);
+            }
+            spawnedTiles.Clear();
+        }
+        
+        private void PlaceTilesOnline()
+        {
+            foreach(KeyValuePair<Vector3Int,TempLevelTileData> tileByGridPos in levelTilesByGridPos)
+            {
+                TempLevelTileData tileToPlace = tileByGridPos.Value;
+                Vector3 position = transform.position + tileSize * (Vector3)tileByGridPos.Key;
+                Quaternion rotation = Quaternion.Euler(0, tileToPlace.quaterRots * 90, 0);
+                GameObject tileGO = Instantiate(tileToPlace.tileGameObject, position, rotation, transform);
+                spawnedTiles.Add(tileGO);
+                NetworkServer.Spawn(tileGO);
+            }
+        }
+
+        public void RegenerateLevelOnline()
+        {
+            ClearTiles();
             GenerateTiles();
-            PlaceTilesOffline();
+            PlaceTilesOnline();
+        }
+
+        public override void OnStartServer()
+        {
+            RegenerateLevelOnline();
         }
     }    
 }
