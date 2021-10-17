@@ -35,7 +35,8 @@ namespace AltarChase.LevelGen
             //add all the leveltiles in levelTiles to the list of available tempLevelTileDatas
             foreach(LevelTile levelTile in levelTiles)
             {
-                levelTilesByConnectorData[levelTile.ConnectorData.ThisTileShape] = new List<LevelTile>();
+                if(!levelTilesByConnectorData.ContainsKey(levelTile.ConnectorData.ThisTileShape))
+                    levelTilesByConnectorData[levelTile.ConnectorData.ThisTileShape] = new List<LevelTile>();
                 levelTilesByConnectorData[levelTile.ConnectorData.ThisTileShape].Add(levelTile);
             }
 
