@@ -1,3 +1,5 @@
+using Mirror;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +9,11 @@ namespace AltarChase.Player
     /// <summary>
     /// This class handles all the player interactions with environment.
     /// </summary>
-    public class PlayerInteract : MonoBehaviour
+    public class PlayerInteract : NetworkBehaviour
     {
+	    private Camera playerCamera;
+	    [SerializeField] private Vector3 camOffset;
+	    
         /* pick up traps
          * trap number & update HUD
          * set traps
@@ -26,9 +31,19 @@ namespace AltarChase.Player
         [SerializeField] private int trapCount = 0;
 
 
+        public override void OnStartClient()
+        {
+	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
+	        motor.enabled = isLocalPlayer;
+
+	        playerCamera = FindObjectOfType<Camera>();
+	        
+        }
+
         /// <summary>
         /// Function for dropping traps.
         /// </summary>
+        [Server] // Only runs on the server.
         private void DropTrap()
         {
 	        // Calculate the distance to the ground from the player character.
@@ -46,15 +61,18 @@ namespace AltarChase.Player
 	        {
 		        // Use the calculated distance to set the position for the trap.
 		        Vector3 position = new Vector3(transform.position.x, transform.position.y - dist, transform.position.z);
-		        Instantiate(trap, position, Quaternion.identity);
+		        GameObject droppedTrap = Instantiate(trap, position, Quaternion.identity);
 		        // Minus 1 from the trap count.
 		        trapCount -= 1;
+		        NetworkServer.Spawn(droppedTrap);
 	        }
 	        else
 	        {
 		        Debug.Log("No Traps left.");
-		        // todo UI feedback, no traps.
+		        // todo UI feedback, no traps. Will need to be called in an RPC.
 	        }
+	        
+	         
         }
         
         // Start is called before the first frame update
@@ -63,12 +81,28 @@ namespace AltarChase.Player
         
         }
 
+        [Command]
+        public void CmdDropTrap()
+        {
+	        DropTrap();
+        }
+
+        
+        
         // Update is called once per frame
         void Update()
         {
-	        if(Input.GetKeyDown(KeyCode.Space))
+	        
+
+	        if(isLocalPlayer)
 	        {
-		        DropTrap();
+		        playerCamera.transform.position = transform.position + camOffset;
+		        playerCamera.transform.LookAt(transform.position);
+		        
+		        if(Input.GetKeyDown(KeyCode.Space))
+		        {
+			        CmdDropTrap();
+		        }
 	        }
         }
     }

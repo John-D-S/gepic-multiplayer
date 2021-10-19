@@ -1002,7 +1002,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 4852505090477363696, guid: efc3eb56a0db7504691ad6a6d378b3d9, type: 3}
+  playerPrefab: {fileID: 9022453017182460188, guid: c88bd53c566f4bf47b87958ea277d25b, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
@@ -1026,6 +1026,7 @@ MonoBehaviour:
   - {fileID: 3692267657161955842, guid: f31420a0c3c91044d8e428d069ed74b9, type: 3}
   - {fileID: 875913178244121527, guid: 6314ca9b70e323640ba7f5c25da0f3be, type: 3}
   - {fileID: 1402329624675377304, guid: 079b08adecba6c443922d7746c837bf5, type: 3}
+  - {fileID: 3212268011313924711, guid: dd5a60db24595074d95a6556af0c7762, type: 3}
   discovery: {fileID: 803359185}
 --- !u!1 &833901393
 GameObject:
@@ -1110,7 +1111,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 642251137}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99931914
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2074,7 +2075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000032453434}
+  m_AnchoredPosition: {x: 0, y: -0.000018333167}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1621373999

@@ -13,7 +13,7 @@ namespace AltarChase.Player
     {
         [Header("Player Variables")]
         [SerializeField, Tooltip("Player Speed")] private float speed = 10;
-        [SerializeField, Tooltip("The Player Camera")] private GameObject cameraGameObject;
+        private GameObject cameraGameObject;
 
         private Rigidbody rb;
         private float movementVelocity;
@@ -26,6 +26,7 @@ namespace AltarChase.Player
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            cameraGameObject = FindObjectOfType<Camera>().gameObject;
         }
 
         /// <summary>
