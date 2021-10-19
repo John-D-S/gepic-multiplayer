@@ -48,7 +48,7 @@ namespace AltarChase
 
 		private void OnClickConnect()
 		{
-			string address = inputField.text;
+			string address = inputField.text.Trim((char)8203);
 			ushort port = 7777;
 			//if the address contains a colon, it has a port
 			if(address.Contains(":"))
