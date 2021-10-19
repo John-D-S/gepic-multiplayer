@@ -123,9 +123,15 @@ namespace AltarChase.Networking
 			// isLocalPlayer is true if this object is the client's local player otherwise it's false
 			PlayerController controller = gameObject.GetComponent<PlayerController>();
 			controller.enabled = isLocalPlayer;
+			
+			CustomNetworkManager.AddPlayer(this);
 		}
 
-		
+		public override void OnStopClient()
+		{
+			CustomNetworkManager.RemovePlayer(this);
+		}
+
 		// this runs when the server starts... On the server
 		// In the case of a host-client situation, this only runs when the host launches because the host is the server
 		// use this for initializing pooling systems
