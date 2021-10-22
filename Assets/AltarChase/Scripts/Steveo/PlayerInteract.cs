@@ -15,8 +15,7 @@ namespace AltarChase.Player
 	    [SerializeField] private Vector3 camOffset;
 	    
         /* pick up traps
-         * trap number & update HUD
-         * set traps
+         * trap number & update HUD         
          * disable motor when hitting trap
          * pick up artifact
          * is holding artifact
@@ -26,9 +25,10 @@ namespace AltarChase.Player
          * MOBILE INPUT - onscreen buttons for trap setting.
          */
 
-        [SerializeField] private GameObject trap;
+        [SerializeField] private GameObject trapPrefab;
 
         [SerializeField] private int trapCount = 0;
+        public uint netID = 0;
 
 
         public override void OnStartClient()
@@ -37,7 +37,8 @@ namespace AltarChase.Player
 	        motor.enabled = isLocalPlayer;
 
 	        playerCamera = FindObjectOfType<Camera>();
-	        
+	        netID = gameObject.GetComponent<NetworkIdentity>().netId;
+
         }
 
         /// <summary>
@@ -61,7 +62,10 @@ namespace AltarChase.Player
 	        {
 		        // Use the calculated distance to set the position for the trap.
 		        Vector3 position = new Vector3(transform.position.x, transform.position.y - dist, transform.position.z);
-		        GameObject droppedTrap = Instantiate(trap, position, Quaternion.identity);
+		        GameObject droppedTrap = Instantiate(trapPrefab, position, Quaternion.identity);
+		        Trap trap = droppedTrap.GetComponent<Trap>();
+		        trap.trapID = netID;
+		        trap.isSet = true;
 		        // Minus 1 from the trap count.
 		        trapCount -= 1;
 		        NetworkServer.Spawn(droppedTrap);

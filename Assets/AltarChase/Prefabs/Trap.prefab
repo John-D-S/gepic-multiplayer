@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 8160342656575254696}
   - component: {fileID: 4597638624156841747}
   - component: {fileID: 3927012143553309933}
+  - component: {fileID: 9220863963348452988}
   - component: {fileID: 4663614674958896037}
+  - component: {fileID: -3468390778777248670}
   m_Layer: 0
   m_Name: Trap
   m_TagString: Untagged
@@ -82,6 +84,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9220863963348452988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212268011313924711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d093ff7c08b5d984485b06220e3a6cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  trapID: 0
+  isSet: 0
+  playerDisableTime: 5
 --- !u!114 &4663614674958896037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,3 +118,16 @@ MonoBehaviour:
   visible: 0
   m_AssetId: dd5a60db24595074d95a6556af0c7762
   hasSpawned: 0
+--- !u!135 &-3468390778777248670
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212268011313924711}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
