@@ -77,5 +77,6 @@ namespace AltarChase.Player
         {
             Move();
         }
-    }
+
+        }
 }

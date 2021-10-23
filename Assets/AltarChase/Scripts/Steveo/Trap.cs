@@ -25,6 +25,7 @@ namespace AltarChase
         [Server]
         private void OnTriggerEnter(Collider _collider)
         {
+            
             if(isSet)
             {
                 uint id = _collider.gameObject.GetComponent<NetworkIdentity>().netId;
@@ -33,26 +34,39 @@ namespace AltarChase
                     //todo play trap animation.
                     
                     PlayerMotor motor = _collider.GetComponent<PlayerMotor>();
+                    PlayerInteract interact = _collider.GetComponent<PlayerInteract>();
                     if(motor != null)
                     {
-                        rend.enabled = false;
-                        trapCollider.enabled = false;
-                        StartCoroutine(DisablePlayer(motor));
+                        RpcHitTrap();
+                        // rend.enabled = false;
+                        // trapCollider.enabled = false;
+                        StartCoroutine(DisablePlayer(motor, interact));
                     }
                 }
             }
         }
 
-       
+
+        
+        [ClientRpc]
+        public void RpcHitTrap()
+        {
+            rend.enabled = false;
+            trapCollider.enabled = false;
+            //StartCoroutine(DisablePlayer(_motor));
+        }
+
+        // todo might need to use a target rpc here to call the diasable on the specific client.
+        
         /// <summary>
         /// Turns on the passed in PlayerMotor allowing the player to move again.
         /// </summary>
         /// <param name="_motor"> The PlayerMotor to enable.</param>
-        private IEnumerator DisablePlayer(PlayerMotor _motor)
+        private IEnumerator DisablePlayer(PlayerMotor _motor, PlayerInteract _interact)
         {
             _motor.enabled = false;
             yield return new WaitForSeconds(playerDisableTime);
-            _motor.enabled = isLocalPlayer;
+            _interact.OnStartClient();
             NetworkServer.Destroy(gameObject);
             //Destroy(gameObject);
         }
