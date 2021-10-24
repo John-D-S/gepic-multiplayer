@@ -65,7 +65,14 @@ namespace AltarChase.Player
             rb.AddForce(force,ForceMode.Force);
             
         }
-        
+
+        /// <summary>
+        /// This stops the player when hitting a set trap.
+        /// </summary>
+        public void StopPlayer()
+        {
+            rb.velocity = new Vector3(0,0,0);
+        }
         
         // Update is called once per frame
         void Update()

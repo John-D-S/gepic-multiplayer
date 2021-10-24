@@ -108,7 +108,7 @@ namespace AltarChase
         /// <param name="_interact"> The PlayerInteract of the hit player</param>
         private IEnumerator DisablePlayer(PlayerMotor _motor, PlayerInteract _interact)
         {
-            
+            _motor.StopPlayer();
             _motor.enabled = false;
             yield return new WaitForSeconds(playerDisableTime);
             _interact.OnStartClient();

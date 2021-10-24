@@ -2,7 +2,7 @@ Shader "Custom/Proximity"
 {
     Properties {
         _MainTex ("Base (RGB)", 2D) = "white" {}
-        _RimValue ("Rim value", Range(0, 1)) = 0.5
+        _RimValue ("Rim value", Range(0, 2)) = 0.5
         _Color ("Color", color) = (1,1,1)
     }
     SubShader {
