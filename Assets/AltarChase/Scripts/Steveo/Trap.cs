@@ -1,7 +1,5 @@
 using AltarChase.Player;
-
 using Mirror;
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,9 +15,9 @@ namespace AltarChase
     {
         [Header("Trap Variables")]
         [Tooltip("This is the ID of the player setting the trap. Gets set when they spawn the trap.")] 
-        public uint trapID = 0;
+        public uint trapID;
         [Tooltip("If false the trap can be picked up into inventory, is true when player sets the trap.")]
-        public bool isSet = false;
+        public bool isSet;
         [SerializeField, Tooltip("The amount of time in seconds the player is disabled when hitting the trap.")] 
         private float playerDisableTime = 5;
 
@@ -33,14 +31,11 @@ namespace AltarChase
         [Server]
         private void OnTriggerEnter(Collider _collider)
         {
-            
             if(isSet)
             {
                 uint id = _collider.gameObject.GetComponent<NetworkIdentity>().netId;
                 if(id != trapID) 
                 {
-                    //todo play trap animation.
-                    
                     PlayerMotor motor = _collider.GetComponent<PlayerMotor>();
                     if(motor != null)
                     {
@@ -55,10 +50,13 @@ namespace AltarChase
             else
             {
                 RpcPickUpTrap(_collider.gameObject);
-                // add a trap to the playerInteract trap count.
             }
         }
 
+        /// <summary>
+        /// Adds a trap to the player trap count.
+        /// </summary>
+        /// <param name="_player"></param>
         [ClientRpc]
         public void RpcPickUpTrap(GameObject _player)
         {
@@ -76,6 +74,7 @@ namespace AltarChase
         public void RpcHitTrap()
         {
             //todo trap animation here instead of turning off the renderer
+            
             rend.enabled = false;
             trapCollider.enabled = false;
         }
@@ -91,18 +90,23 @@ namespace AltarChase
         {
             PlayerMotor motor = _target.identity.gameObject.GetComponent<PlayerMotor>();
             PlayerInteract interact = _target.identity.GetComponent<PlayerInteract>();
+            
+            // todo Drop the artifact if holding it.
+            
             StartCoroutine(DisablePlayer(motor, interact));
 
         }
 
-        // todo might need to use a target rpc here to call the diasable on the specific client.
         
+
         /// <summary>
         /// Turns off and on the passed in PlayerMotor when a player hits a trap.
         /// </summary>
         /// <param name="_motor"> The PlayerMotor to enable.</param>
+        /// <param name="_interact"> The PlayerInteract of the hit player</param>
         private IEnumerator DisablePlayer(PlayerMotor _motor, PlayerInteract _interact)
         {
+            
             _motor.enabled = false;
             yield return new WaitForSeconds(playerDisableTime);
             _interact.OnStartClient();
@@ -116,10 +120,5 @@ namespace AltarChase
             trapCollider = GetComponent<SphereCollider>();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }

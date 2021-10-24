@@ -14,9 +14,8 @@ namespace AltarChase.Player
 	    private Camera playerCamera;
 	    [SerializeField] private Vector3 camOffset;
 	    
-        /* pick up traps
-         * trap number & update HUD         
-         * disable motor when hitting trap
+        /* 
+         * trap number & update HUD 
          * pick up artifact
          * is holding artifact
          * drop artifact
@@ -56,7 +55,6 @@ namespace AltarChase.Player
 		        dist = hit.distance;
 	        }
 
-	        // todo will have to be moved into the networked player script.
 	        
 	        if(trapCount > 0)
 	        {
@@ -64,6 +62,7 @@ namespace AltarChase.Player
 		        Vector3 position = new Vector3(transform.position.x, transform.position.y - dist, transform.position.z);
 		        GameObject droppedTrap = Instantiate(trapPrefab, position, Quaternion.identity);
 		        Trap trap = droppedTrap.GetComponent<Trap>();
+		        // Give trap the ID of the player and set it.
 		        trap.trapID = netID;
 		        trap.isSet = true;
 		        // Minus 1 from the trap count.
@@ -85,6 +84,9 @@ namespace AltarChase.Player
         
         }
 
+        /// <summary>
+        /// The command for the Drop trap function
+        /// </summary>
         [Command]
         public void CmdDropTrap()
         {
@@ -96,8 +98,6 @@ namespace AltarChase.Player
         // Update is called once per frame
         void Update()
         {
-	        
-
 	        if(isLocalPlayer)
 	        {
 		        playerCamera.transform.position = transform.position + camOffset;
