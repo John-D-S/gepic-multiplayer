@@ -40,7 +40,11 @@ namespace AltarChase
                         RpcHitTrap();
                         // rend.enabled = false;
                         // trapCollider.enabled = false;
-                        StartCoroutine(DisablePlayer(motor, interact));
+                        //StartCoroutine(DisablePlayer(motor, interact));
+                        //CmdDisablePlayer(_collider.gameObject);
+                        NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
+
+                        TargetDisablePlayer(identity.connectionToClient, _collider.gameObject);
                     }
                 }
             }
@@ -54,6 +58,22 @@ namespace AltarChase
             rend.enabled = false;
             trapCollider.enabled = false;
             //StartCoroutine(DisablePlayer(_motor));
+        }
+
+        [Command]
+        public void CmdDisablePlayer(GameObject _target)
+        {
+            NetworkIdentity identity = _target.GetComponent<NetworkIdentity>();
+            TargetDisablePlayer(identity.connectionToClient, _target);
+        }
+        
+        [TargetRpc]
+        public void TargetDisablePlayer(NetworkConnection _target, GameObject _player)
+        {
+            PlayerMotor motor = _target.identity.gameObject.GetComponent<PlayerMotor>();
+            PlayerInteract interact = _target.identity.GetComponent<PlayerInteract>();
+            StartCoroutine(DisablePlayer(motor, interact));
+
         }
 
         // todo might need to use a target rpc here to call the diasable on the specific client.
