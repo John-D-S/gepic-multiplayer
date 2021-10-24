@@ -27,7 +27,7 @@ namespace AltarChase.Player
 
         [SerializeField] private GameObject trapPrefab;
 
-        [SerializeField] private int trapCount = 0;
+        [SerializeField] public int trapCount = 0;
         public uint netID = 0;
 
 

@@ -15,13 +15,21 @@ namespace AltarChase
     /// </summary>
     public class Trap : NetworkBehaviour
     {
+        [Header("Trap Variables")]
+        [Tooltip("This is the ID of the player setting the trap. Gets set when they spawn the trap.")] 
         public uint trapID = 0;
+        [Tooltip("If false the trap can be picked up into inventory, is true when player sets the trap.")]
         public bool isSet = false;
-        [SerializeField] private float playerDisableTime = 5;
+        [SerializeField, Tooltip("The amount of time in seconds the player is disabled when hitting the trap.")] 
+        private float playerDisableTime = 5;
 
         private MeshRenderer rend;
         private SphereCollider trapCollider;
 
+        /// <summary>
+        /// This is the Ontrigger for the trap and is running on the server.
+        /// </summary>
+        /// <param name="_collider">The collider of the player that hit the trap.</param>
         [Server]
         private void OnTriggerEnter(Collider _collider)
         {
@@ -29,44 +37,55 @@ namespace AltarChase
             if(isSet)
             {
                 uint id = _collider.gameObject.GetComponent<NetworkIdentity>().netId;
-                if(id != trapID) // network ID?? instead?
+                if(id != trapID) 
                 {
                     //todo play trap animation.
                     
                     PlayerMotor motor = _collider.GetComponent<PlayerMotor>();
-                    PlayerInteract interact = _collider.GetComponent<PlayerInteract>();
                     if(motor != null)
                     {
                         RpcHitTrap();
-                        // rend.enabled = false;
-                        // trapCollider.enabled = false;
-                        //StartCoroutine(DisablePlayer(motor, interact));
-                        //CmdDisablePlayer(_collider.gameObject);
+                        
                         NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
 
                         TargetDisablePlayer(identity.connectionToClient, _collider.gameObject);
                     }
                 }
             }
+            else
+            {
+                RpcPickUpTrap(_collider.gameObject);
+                // add a trap to the playerInteract trap count.
+            }
+        }
+
+        [ClientRpc]
+        public void RpcPickUpTrap(GameObject _player)
+        {
+            PlayerInteract interact = _player.GetComponent<PlayerInteract>();
+            interact.trapCount += 1;
+            NetworkServer.Destroy(gameObject);
         }
 
 
-        
+        /// <summary>
+        /// This disables the traps collider and mesh renderer so that it can't be hit while it is disabling
+        /// the PlayerMotor of the hit player.
+        /// </summary>
         [ClientRpc]
         public void RpcHitTrap()
         {
+            //todo trap animation here instead of turning off the renderer
             rend.enabled = false;
             trapCollider.enabled = false;
-            //StartCoroutine(DisablePlayer(_motor));
         }
 
-        [Command]
-        public void CmdDisablePlayer(GameObject _target)
-        {
-            NetworkIdentity identity = _target.GetComponent<NetworkIdentity>();
-            TargetDisablePlayer(identity.connectionToClient, _target);
-        }
         
+        /// <summary>
+        /// This calls the coroutine that disables the PlayerMotor of the player that hits the trap.
+        /// </summary>
+        /// <param name="_target">The NetworkConnection of the player</param>
+        /// <param name="_player">The player game object</param>
         [TargetRpc]
         public void TargetDisablePlayer(NetworkConnection _target, GameObject _player)
         {
@@ -79,7 +98,7 @@ namespace AltarChase
         // todo might need to use a target rpc here to call the diasable on the specific client.
         
         /// <summary>
-        /// Turns on the passed in PlayerMotor allowing the player to move again.
+        /// Turns off and on the passed in PlayerMotor when a player hits a trap.
         /// </summary>
         /// <param name="_motor"> The PlayerMotor to enable.</param>
         private IEnumerator DisablePlayer(PlayerMotor _motor, PlayerInteract _interact)
@@ -88,7 +107,6 @@ namespace AltarChase
             yield return new WaitForSeconds(playerDisableTime);
             _interact.OnStartClient();
             NetworkServer.Destroy(gameObject);
-            //Destroy(gameObject);
         }
 
         // Start is called before the first frame update
