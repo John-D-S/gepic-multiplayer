@@ -22,6 +22,7 @@ namespace AltarChase
         private float playerDisableTime = 5;
 
         private MeshRenderer rend;
+        [SerializeField] private MeshRenderer proximityRend;
         private SphereCollider trapCollider;
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace AltarChase
             //todo trap animation here instead of turning off the renderer
             
             rend.enabled = false;
+            proximityRend.enabled = false;
             trapCollider.enabled = false;
         }
 

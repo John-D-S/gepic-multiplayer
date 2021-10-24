@@ -183,6 +183,7 @@ MonoBehaviour:
   trapID: 0
   isSet: 0
   playerDisableTime: 5
+  proximityRend: {fileID: 3011890411869323271}
 --- !u!114 &4663614674958896037
 MonoBehaviour:
   m_ObjectHideFlags: 0
