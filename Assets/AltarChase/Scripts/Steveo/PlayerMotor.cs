@@ -19,6 +19,8 @@ namespace AltarChase.Player
         private float movementVelocity;
         private Vector3 movementDirection;
 
+        private Vector3 lastLookDirection;
+
         //todo Add Animator for movement animations.
         // todo MOBILE INPUT
 
@@ -76,6 +78,19 @@ namespace AltarChase.Player
         private void FixedUpdate()
         {
             Move();
+            
+            // Sets the character facing direction when moving
+            if(movementVelocity != 0)
+            {
+                transform.rotation = Quaternion.LookRotation(movementDirection);
+                // Saves the direction to use when stopped.
+                lastLookDirection = movementDirection;
+            }
+            // Sets the character facing direction to the last direction it was moving in.
+            if(movementVelocity == 0)
+            {
+                transform.rotation = Quaternion.LookRotation(lastLookDirection);
+            }
         }
     }
 }
