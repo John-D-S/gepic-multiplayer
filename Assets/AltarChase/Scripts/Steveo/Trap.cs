@@ -128,5 +128,9 @@ namespace AltarChase
             trapCollider = GetComponent<SphereCollider>();
         }
 
+        public override void OnStartServer()
+        {
+            Start();
+        }
     }
 }
