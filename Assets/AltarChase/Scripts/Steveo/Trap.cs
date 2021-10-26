@@ -29,7 +29,7 @@ namespace AltarChase
         /// This is the Ontrigger for the trap and is running on the server.
         /// </summary>
         /// <param name="_collider">The collider of the player that hit the trap.</param>
-        [Server]
+        //[Server]
         private void OnTriggerEnter(Collider _collider)
         {
             if(_collider.CompareTag("Player"))
