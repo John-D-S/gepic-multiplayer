@@ -340,7 +340,7 @@ MonoBehaviour:
   syncInterval: 0.1
   camOffset: {x: 0, y: 15, z: 0}
   trapPrefab: {fileID: 3212268011313924711, guid: dd5a60db24595074d95a6556af0c7762, type: 3}
-  trapCount: 3
+  trapCount: 20
   netID: 0
   playerLight: {fileID: 6039167290570098433}
   speedBoost: {fileID: 2445625172369103156, guid: 15324036a184f2e43a4e3fd9b9d0b4cb, type: 3}

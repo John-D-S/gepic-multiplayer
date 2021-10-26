@@ -82,7 +82,7 @@ namespace AltarChase
         {
             //todo trap animation here instead of turning off the renderer
             
-            rend.enabled = false;
+            //rend.enabled = false;
             proximityRend.enabled = false;
             trapCollider.enabled = false;
         }
@@ -124,7 +124,7 @@ namespace AltarChase
         // Start is called before the first frame update
         void Start()
         {
-            rend = GetComponent<MeshRenderer>();
+            //rend = GetComponent<MeshRenderer>();
             trapCollider = GetComponent<SphereCollider>();
         }
 
