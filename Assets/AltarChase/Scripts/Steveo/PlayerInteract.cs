@@ -32,6 +32,8 @@ namespace AltarChase.Player
         [SerializeField] private Light playerLight;
         private bool isLightOn = true;
 
+        [SerializeField] private GameObject speedBoost;
+
 
         public override void OnStartClient()
         {
@@ -123,6 +125,12 @@ namespace AltarChase.Player
 		        if(Input.GetKeyDown(KeyCode.E))
 		        {
 			        CmdTurnOffLight();
+		        }
+		        
+		        if(Input.GetKeyDown(KeyCode.Y))
+		        {
+			        GameObject speed = Instantiate(speedBoost);
+			        NetworkServer.Spawn(speed);
 		        }
 		        
 	        }

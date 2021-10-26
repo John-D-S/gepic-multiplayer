@@ -1027,6 +1027,7 @@ MonoBehaviour:
   - {fileID: 875913178244121527, guid: 6314ca9b70e323640ba7f5c25da0f3be, type: 3}
   - {fileID: 1402329624675377304, guid: 079b08adecba6c443922d7746c837bf5, type: 3}
   - {fileID: 3212268011313924711, guid: dd5a60db24595074d95a6556af0c7762, type: 3}
+  - {fileID: 2445625172369103156, guid: 15324036a184f2e43a4e3fd9b9d0b4cb, type: 3}
   discovery: {fileID: 803359185}
 --- !u!1 &833901393
 GameObject:

@@ -12,7 +12,9 @@ namespace AltarChase.Player
     public class PlayerMotor : MonoBehaviour
     {
         [Header("Player Variables")]
-        [SerializeField, Tooltip("Player Speed")] private float speed = 10;
+        [SerializeField, Tooltip("Player Speed")] public float speed = 20;
+        [SerializeField, Tooltip("Player Original Speed")] public float originalSpeed = 20;
+        [SerializeField] private float boostTime = 10;
         private GameObject cameraGameObject;
 
         private Rigidbody rb;
@@ -100,5 +102,19 @@ namespace AltarChase.Player
             }
         }
 
+        public void CallSpeedBoostCR() => StartCoroutine(SpeedBoost_CR());
+        
+        /// <summary>
+        /// Changes the speed of the player after picking up the speedboost pickup.
+        /// </summary>
+        public IEnumerator SpeedBoost_CR()
+        {
+            Debug.Log("cr running");
+            speed = 30;
+            yield return new WaitForSeconds(boostTime);
+            Debug.Log("cr done");
+            speed = originalSpeed;
         }
+
+    }
 }
