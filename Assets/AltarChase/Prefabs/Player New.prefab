@@ -320,6 +320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  originalSpeed: 20
+  boostTime: 10
 --- !u!114 &2111193723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +341,7 @@ MonoBehaviour:
   trapCount: 3
   netID: 0
   playerLight: {fileID: 6039167290570098433}
+  speedBoost: {fileID: 2445625172369103156, guid: 15324036a184f2e43a4e3fd9b9d0b4cb, type: 3}
 --- !u!114 &1731764962
 MonoBehaviour:
   m_ObjectHideFlags: 0
