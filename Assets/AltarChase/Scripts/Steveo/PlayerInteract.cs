@@ -120,7 +120,7 @@ namespace AltarChase.Player
 		        playerCamera.transform.position = transform.position + camOffset;
 		        playerCamera.transform.LookAt(transform.position);
 		        
-		        if(Input.GetKeyDown(KeyCode.Space) || (playerInput.actions["Drop Trap"].ReadValue<float>()!=0))
+		        if(Input.GetKeyDown(KeyCode.Space) || (playerInput.actions["Drop Trap"].triggered))
 		        {
 			        CmdDropTrap();
 		        }
