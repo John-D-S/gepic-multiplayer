@@ -29,6 +29,9 @@ namespace AltarChase.Player
         [SerializeField] public int trapCount = 0;
         public uint netID = 0;
 
+        [SerializeField] private Light playerLight;
+        private bool isLightOn = true;
+
 
         public override void OnStartClient()
         {
@@ -38,6 +41,15 @@ namespace AltarChase.Player
 	        playerCamera = FindObjectOfType<Camera>();
 	        netID = gameObject.GetComponent<NetworkIdentity>().netId;
 
+        }
+        
+        /// <summary>
+        /// The command for the Drop trap function
+        /// </summary>
+        [Command]
+        public void CmdDropTrap()
+        {
+	        DropTrap();
         }
 
         /// <summary>
@@ -77,21 +89,21 @@ namespace AltarChase.Player
 	        
 	         
         }
-        
-        // Start is called before the first frame update
-        void Start()
+
+        [Command]
+        public void CmdTurnOffLight()
         {
+	        RpcTurnOffLight();
+        }
         
+        [ClientRpc]
+        private void RpcTurnOffLight()
+        {
+	        isLightOn = !isLightOn;
+	        playerLight.enabled = isLightOn;
         }
 
-        /// <summary>
-        /// The command for the Drop trap function
-        /// </summary>
-        [Command]
-        public void CmdDropTrap()
-        {
-	        DropTrap();
-        }
+        
 
         
         
@@ -107,6 +119,12 @@ namespace AltarChase.Player
 		        {
 			        CmdDropTrap();
 		        }
+		        
+		        if(Input.GetKeyDown(KeyCode.E))
+		        {
+			        CmdTurnOffLight();
+		        }
+		        
 	        }
         }
     }

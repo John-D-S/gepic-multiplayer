@@ -32,26 +32,32 @@ namespace AltarChase
         [Server]
         private void OnTriggerEnter(Collider _collider)
         {
-            if(isSet)
+            if(_collider.CompareTag("Player"))
             {
-                uint id = _collider.gameObject.GetComponent<NetworkIdentity>().netId;
-                if(id != trapID) 
+                // Check for the player object so no errors from wall or floor colliders
+                if(isSet)
                 {
-                    PlayerMotor motor = _collider.GetComponent<PlayerMotor>();
-                    if(motor != null)
+                    // Gets the player ID then checks it to the traps ID
+                    uint id = _collider.gameObject.GetComponent<NetworkIdentity>().netId;
+                    if(id != trapID)
                     {
-                        RpcHitTrap();
-                        
-                        NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
+                        PlayerMotor motor = _collider.GetComponent<PlayerMotor>();
+                        if(motor != null)
+                        {
+                            RpcHitTrap();
 
-                        TargetDisablePlayer(identity.connectionToClient, _collider.gameObject);
+                            NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
+
+                            TargetDisablePlayer(identity.connectionToClient, _collider.gameObject);
+                        }
                     }
                 }
+                else
+                {
+                    RpcPickUpTrap(_collider.gameObject);
+                }
             }
-            else
-            {
-                RpcPickUpTrap(_collider.gameObject);
-            }
+            
         }
 
         /// <summary>
