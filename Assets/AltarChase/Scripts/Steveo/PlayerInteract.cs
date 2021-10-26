@@ -125,7 +125,7 @@ namespace AltarChase.Player
 			        CmdDropTrap();
 		        }
 		        
-		        if(Input.GetKeyDown(KeyCode.E))
+		        if(Input.GetKeyDown(KeyCode.E) || (playerInput.actions["Light"].triggered))
 		        {
 			        CmdTurnOffLight();
 		        }
