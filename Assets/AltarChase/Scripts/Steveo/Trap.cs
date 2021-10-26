@@ -126,7 +126,7 @@ namespace AltarChase
         // Start is called before the first frame update
         void Start()
         {
-            //rend = GetComponent<MeshRenderer>();
+            rend = GetComponent<MeshRenderer>();
             trapCollider = GetComponent<SphereCollider>();
         }
 
