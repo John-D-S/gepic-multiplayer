@@ -81,10 +81,12 @@ namespace AltarChase
         public void RpcHitTrap()
         {
             //todo trap animation here instead of turning off the renderer
-            
-            rend.enabled = false;
-            proximityRend.enabled = false;
-            trapCollider.enabled = false;
+            if(rend != null)
+                rend.enabled = false;
+            if(proximityRend != null)
+                proximityRend.enabled = false;
+            if(trapCollider != null)
+                trapCollider.enabled = false;
         }
 
         

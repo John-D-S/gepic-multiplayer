@@ -3,6 +3,7 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AltarChase.Player
 {
@@ -33,6 +34,7 @@ namespace AltarChase.Player
         private bool isLightOn = true;
 
         [SerializeField] private GameObject speedBoost;
+        private PlayerInput playerInput;
 
 
         public override void OnStartClient()
@@ -40,6 +42,7 @@ namespace AltarChase.Player
 	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
 	        motor.enabled = isLocalPlayer;
 
+	        playerInput = GetComponent<PlayerInput>();
 	        playerCamera = FindObjectOfType<Camera>();
 	        netID = gameObject.GetComponent<NetworkIdentity>().netId;
 
@@ -117,7 +120,7 @@ namespace AltarChase.Player
 		        playerCamera.transform.position = transform.position + camOffset;
 		        playerCamera.transform.LookAt(transform.position);
 		        
-		        if(Input.GetKeyDown(KeyCode.Space))
+		        if(Input.GetKeyDown(KeyCode.Space) || (playerInput.actions["Drop Trap"].triggered))
 		        {
 			        CmdDropTrap();
 		        }
