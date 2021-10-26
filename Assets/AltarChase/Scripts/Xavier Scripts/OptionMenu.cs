@@ -22,6 +22,9 @@ namespace AltarChase.Scripts.Xavier_Scripts
         [Header("Texture Set")]
         public TMP_Dropdown textureDropdown;
 
+        [Header("Anti-Aliasing Set")] 
+        public TMP_Dropdown aaDropdown;
+
         [Header("Volume Set")]
         public Slider masterVolume;
         public Slider sfxVolumeSlider;
@@ -114,6 +117,17 @@ namespace AltarChase.Scripts.Xavier_Scripts
             qualityDropdown.value = 6;
             PlayerPrefs.SetInt("TextureQuality", textureIndex);
         }
+        
+        /// <summary>
+        /// Method that will find all the AA settings and place it in the Dropdown!
+        /// </summary>
+        /// <param name="aaIndex"> How many AA settings </param>
+        public void SetAntiAliasing(int aaIndex)
+        {
+            QualitySettings.antiAliasing = aaIndex;
+            qualityDropdown.value = 6;
+        }
+        
         public void SetQuality(int qualityIndex)
         {
             QualitySettings.SetQualityLevel(qualityIndex);
