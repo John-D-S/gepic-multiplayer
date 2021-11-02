@@ -101,6 +101,11 @@ namespace AltarChase
         {
             PlayerMotor motor = _target.identity.gameObject.GetComponent<PlayerMotor>();
             PlayerInteract interact = _target.identity.GetComponent<PlayerInteract>();
+
+            if(interact.artifact != null)
+            {
+                interact.CmdDropArtifact(interact.artifact.gameObject);
+            }
             
             // todo Drop the artifact if holding it.
             
