@@ -25,7 +25,7 @@ namespace AltarChase
 				NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
 				PlayerInteract interact = identity.gameObject.GetComponent<PlayerInteract>();
 				RpcPickUpItem(interact);
-				TargetGotArtifact(identity.connectionToClient, interact);
+				TargetGotArtifact(identity.connectionToClient);
 			}
             
 		}
@@ -40,21 +40,23 @@ namespace AltarChase
 		[ClientRpc]
 		public void RpcDropItem(PlayerInteract _interact)
 		{
-			Debug.Log("calling the rpcdropitem");
+			Debug.Log("Dropping the artifact");
 			transform.position = _interact.itemDropLocation.position;
 			transform.parent = null;
+			_interact.artifact = null;
+			_interact.isHoldingArtifact = false;
 			isHeld = false;
 		}
-		
+
 		/// <summary>
 		/// This calls the ....
 		/// </summary>
 		/// <param name="_target">The NetworkConnection of the player</param>
 		[TargetRpc]
-		public void TargetGotArtifact(NetworkConnection _target, PlayerInteract _interact)
+		public void TargetGotArtifact(NetworkConnection _target)
 		{
-			
-			_interact.GetArtifact(this);
+			PlayerInteract interact = _target.identity.gameObject.GetComponent<PlayerInteract>();
+			interact.GetArtifact(gameObject);
 			isHeld = true;
 			// dont destroy. NetworkServer.Destroy(gameObject);
 

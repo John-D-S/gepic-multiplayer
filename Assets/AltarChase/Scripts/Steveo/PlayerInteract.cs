@@ -55,10 +55,10 @@ namespace AltarChase.Player
         }
 
         
-        public void GetArtifact(Artifact _artifact)
+        public void GetArtifact(GameObject _artifact)
         {
 	        isHoldingArtifact = true;
-	        artifact = _artifact;
+	        artifact = _artifact.GetComponent<Artifact>();
         }
 
         [ClientRpc]
@@ -79,8 +79,6 @@ namespace AltarChase.Player
         {
 	        artifact = _artifact.GetComponent<Artifact>();
 	        artifact.RpcDropItem(this);
-	        artifact = null;
-	        Debug.Log("should be dropping the artifact");
         }
 
 
