@@ -75,14 +75,11 @@ namespace AltarChase.Player
         }
 
         [Command]
-        public void CmdDropArtifact()
+        public void CmdDropArtifact(GameObject _artifact)
         {
-	        
-		        Debug.Log("should be dropping the artifact");
-				artifact.RpcDropItem(this);
-				
-		        
-	        
+	        artifact = _artifact.GetComponent<Artifact>();
+	        artifact.RpcDropItem(this);
+	        Debug.Log("should be dropping the artifact");
         }
 
 
@@ -188,7 +185,7 @@ namespace AltarChase.Player
 		        {
 			        if(artifact != null)
 			        {
-						CmdDropArtifact();
+						CmdDropArtifact(artifact.gameObject);
 				        
 			        }
 		        }

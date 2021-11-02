@@ -25,6 +25,7 @@ namespace AltarChase
 			{
 				NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
 				TargetSpeedBoost(identity.connectionToClient);
+				DestroyItem();
 			}
             
 		}
@@ -38,10 +39,15 @@ namespace AltarChase
 		{
 			PlayerMotor motor = _target.identity.gameObject.GetComponent<PlayerMotor>();
 			motor.CallSpeedBoostCR();
-			NetworkServer.Destroy(gameObject);
-
+			//NetworkServer.Destroy(gameObject);
+			//DestroyItem();
+			// NetworkServer.UnSpawn(this.gameObject);
+			// NetworkServer.Destroy(gameObject);
 		}
-		
-		
+
+		[Server]
+		public void DestroyItem() => NetworkServer.Destroy(gameObject);
+
+
 	}
 }

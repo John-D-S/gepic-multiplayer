@@ -41,8 +41,9 @@ namespace AltarChase
 		public void RpcDropItem(PlayerInteract _interact)
 		{
 			Debug.Log("calling the rpcdropitem");
-			transform.parent = null;
 			transform.position = _interact.itemDropLocation.position;
+			transform.parent = null;
+			isHeld = false;
 		}
 		
 		/// <summary>
