@@ -79,6 +79,7 @@ namespace AltarChase.Player
         {
 	        artifact = _artifact.GetComponent<Artifact>();
 	        artifact.RpcDropItem(this);
+	        artifact = null;
 	        Debug.Log("should be dropping the artifact");
         }
 
