@@ -22,6 +22,7 @@ namespace AltarChase
 		{
 			if(_collider.CompareTag("Player") && !isHeld)
 			{
+				isHeld = true;
 				NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
 				PlayerInteract interact = identity.gameObject.GetComponent<PlayerInteract>();
 				RpcPickUpItem(interact);
@@ -57,7 +58,6 @@ namespace AltarChase
 		{
 			PlayerInteract interact = _target.identity.gameObject.GetComponent<PlayerInteract>();
 			interact.GetArtifact(gameObject);
-			isHeld = true;
 			// dont destroy. NetworkServer.Destroy(gameObject);
 
 		}

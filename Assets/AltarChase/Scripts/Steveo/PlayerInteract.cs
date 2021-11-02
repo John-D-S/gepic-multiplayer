@@ -42,6 +42,8 @@ namespace AltarChase.Player
 
         [SerializeField] private GameObject artifactTest;
 
+        [SerializeField] public float timeHeldArtifact = 0;
+
 
         public override void OnStartClient()
         {
@@ -148,10 +150,8 @@ namespace AltarChase.Player
 	        playerLight.enabled = isLightOn;
         }
 
-        
 
-        
-        
+
         // Update is called once per frame
         void Update()
         {
@@ -188,6 +188,9 @@ namespace AltarChase.Player
 				        
 			        }
 		        }
+
+		        if(isHoldingArtifact)
+			        timeHeldArtifact += Time.deltaTime;
 		        
 	        }
         }
