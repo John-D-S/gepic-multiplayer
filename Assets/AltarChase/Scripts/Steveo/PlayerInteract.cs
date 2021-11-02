@@ -2,6 +2,9 @@ using Mirror;
 
 using System.Collections;
 using System.Collections.Generic;
+
+using TMPro;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +30,7 @@ namespace AltarChase.Player
         [SerializeField] private GameObject trapPrefab;
 
         [SerializeField] public int trapCount = 0;
+        [SerializeField] private TMP_Text trapCountHud;
         public uint netID = 0;
 
         [SerializeField] private Light playerLight;
@@ -43,6 +47,7 @@ namespace AltarChase.Player
         [SerializeField] private GameObject artifactTest;
 
         [SerializeField] public float timeHeldArtifact = 0;
+        
 
 
         public override void OnStartClient()
@@ -53,6 +58,7 @@ namespace AltarChase.Player
 	        playerInput = GetComponent<PlayerInput>();
 	        playerCamera = FindObjectOfType<Camera>();
 	        netID = gameObject.GetComponent<NetworkIdentity>().netId;
+	        trapCountHud = FindObjectOfType<TMP_Text>();
 
         }
 
@@ -91,6 +97,7 @@ namespace AltarChase.Player
         public void CmdDropTrap()
         {
 	        DropTrap();
+	        
         }
 
         /// <summary>
@@ -118,8 +125,7 @@ namespace AltarChase.Player
 		        // Give trap the ID of the player and set it.
 		        trap.trapID = netID;
 		        trap.isSet = true;
-		        // Minus 1 from the trap count.
-		        trapCount -= 1;
+		        
 		        NetworkServer.Spawn(droppedTrap);
 	        }
 	        else
@@ -127,8 +133,6 @@ namespace AltarChase.Player
 		        Debug.Log("No Traps left.");
 		        // todo UI feedback, no traps. Will need to be called in an RPC.
 	        }
-	        
-	         
         }
 
         /// <summary>
@@ -162,7 +166,11 @@ namespace AltarChase.Player
 		        
 		        if(Input.GetKeyDown(KeyCode.Space) || (playerInput.actions["Drop Trap"].triggered))
 		        {
-			        CmdDropTrap();
+			        if(trapCount > 0)
+			        {
+				        trapCount -= 1;
+						CmdDropTrap();
+			        }
 		        }
 		        
 		        if(Input.GetKeyDown(KeyCode.E) || (playerInput.actions["Light"].triggered))
@@ -191,7 +199,9 @@ namespace AltarChase.Player
 
 		        if(isHoldingArtifact)
 			        timeHeldArtifact += Time.deltaTime;
-		        
+
+		        if(trapCountHud != null)
+			        trapCountHud.text = trapCount.ToString();
 	        }
         }
     }
