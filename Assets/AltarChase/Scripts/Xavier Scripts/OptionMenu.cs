@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -29,11 +31,44 @@ namespace AltarChase.Scripts.Xavier_Scripts
         public Slider masterVolume;
         public Slider sfxVolumeSlider;
         float currentVolume;
-    
-    
-        public static bool loadData = false;
 
-        public void Awake()
+        [SerializeField] private GameObject pausemenuUI;
+        public static bool isPaused = false;
+        public static bool loadData = false;
+        
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                isPaused = true;
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
+            }
+        }
+        
+        public void Resume()
+        {
+            pausemenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+
+        void Pause()
+        {
+            pausemenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            isPaused = true;
+        }
+
+        public void ResolutionAwake()
         {
             #region Resolution Start
             resolutionDropdown.ClearOptions();
@@ -68,10 +103,15 @@ namespace AltarChase.Scripts.Xavier_Scripts
             }
             #endregion
         }
+        
 
         private void Start()
         {
+#if UNITY_STANDALONE
+            ResolutionAwake();
+
             LoadSettings();
+#endif
         }
 
         #region Volume Stuff

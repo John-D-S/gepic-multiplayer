@@ -484,9 +484,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208708431791390059}
-  - component: {fileID: 7873749774255890326}
   m_Layer: 5
-  m_Name: Options Menu 1
+  m_Name: Options Menu (Mobile)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,26 +511,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7873749774255890326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208708431791390060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 928f9c43162d6d64c85a68828a59571c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: f6344237ec4b31e48b88fc8820f63150, type: 2}
-  resolutionDropdown: {fileID: 0}
-  fullscreenToggle: {fileID: 0}
-  qualityDropdown: {fileID: 0}
-  textureDropdown: {fileID: 0}
-  aaDropdown: {fileID: 0}
-  masterVolume: {fileID: 7873749773870813840}
-  sfxVolumeSlider: {fileID: 7873749773252629597}
 --- !u!1 &1208708432667548940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1381,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7873749774255890326}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AltarChase.Scripts.Xavier_Scripts.OptionMenu, Assembly-CSharp
         m_MethodName: SFXVolume
         m_Mode: 0
@@ -1860,7 +1839,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7873749774255890326}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AltarChase.Scripts.Xavier_Scripts.OptionMenu, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
