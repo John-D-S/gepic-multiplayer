@@ -1131,7 +1131,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 510820509}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1722840403432052350, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: offlineScene
@@ -1139,19 +1139,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8308240217357903040, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8308240217357903040, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -431.36032
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8308240217357903040, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -272.14587
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8308240217357903040, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 587.10645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8308240217357903040, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1311,10 +1311,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 431.36032, y: 272.14587, z: -587.10645}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1846068172}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &510820510
 MonoBehaviour:
@@ -1599,7 +1598,7 @@ Transform:
   m_Children:
   - {fileID: 630862655}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &654934616
 GameObject:
@@ -3118,11 +3117,6 @@ CanvasRenderer:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6320602778318955382, guid: 4929dde8f22e4df49ba942cf930918f8, type: 3}
   m_PrefabInstance: {fileID: 1110705001}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1846068172 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8308240217357903040, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
-  m_PrefabInstance: {fileID: 494392686}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1987274603
 GameObject:
