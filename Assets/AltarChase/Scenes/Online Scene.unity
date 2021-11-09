@@ -242,7 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  mobileControls: {fileID: 0}
+  mobileControls: {fileID: 1216647447}
 --- !u!114 &551674052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +774,11 @@ PrefabInstance:
 --- !u!224 &1216647446 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5885847515826362795, guid: 69c84ccdea5e6b34a9e3d20ddd92adea, type: 3}
+  m_PrefabInstance: {fileID: 1216647445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1216647447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5885847515826362804, guid: 69c84ccdea5e6b34a9e3d20ddd92adea, type: 3}
   m_PrefabInstance: {fileID: 1216647445}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1380644293

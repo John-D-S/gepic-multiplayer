@@ -165,23 +165,27 @@ namespace AltarChase.LevelGen
             }
 
             List<GameObject> allObjetsToSpawn = new List<GameObject>();
-            for(int i = 0; i < numberOfPlayerSpawnPoints; i++)
+            if(playerSpawnPoint)
+                for(int i = 0; i < numberOfPlayerSpawnPoints; i++)
+                    allObjetsToSpawn.Add(playerSpawnPoint);
+            if(pickups != null)
             {
-                allObjetsToSpawn.Add(playerSpawnPoint);
+                for(int i = 0; i < numberOfPickups; i++)
+                {
+                    int index = i % pickups.Count;
+                    if(pickups[index])
+                        allObjetsToSpawn.Add(pickups[index]);
+                }
             }
-            for(int i = 0; i < numberOfPickups; i++)
-            {
-                allObjetsToSpawn.Add(pickups[i % pickups.Count]);
-            }
-            allObjetsToSpawn.Add(idol);
-            allObjetsToSpawn.Add(exit);
+            if(idol)
+                allObjetsToSpawn.Add(idol);
+            if(exit)
+                allObjetsToSpawn.Add(exit);
             
             List<Vector3Int> shuffledSpawnPositions = closedPositions.OrderBy(x => Guid.NewGuid()).ToList();
 
             for(int i = 0; i < allObjetsToSpawn.Count; i++)
-            {
                 objectsToSpawnByTilePos[shuffledSpawnPositions[i]] = allObjetsToSpawn[i];
-            }
         }
     #endregion
 
