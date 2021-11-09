@@ -557,6 +557,8 @@ MonoBehaviour:
   syncInterval: 0.1
   connectorData:
     tileShape: 1
+  spawnPosition: {x: 5, y: 0, z: 5}
+  spawnRotation: 225
 --- !u!114 &5062837759215785438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c656f7a5f3c99a746957e94cb4f3e9e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c656f7a5f3c99a746957e94cb4f3e9e6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -676,7 +678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c656f7a5f3c99a746957e94cb4f3e9e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c656f7a5f3c99a746957e94cb4f3e9e6, type: 3}
       propertyPath: m_LocalRotation.w

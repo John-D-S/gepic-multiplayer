@@ -93,7 +93,6 @@ namespace AltarChase.LevelGen
 					}
 					continue;
 				}
-				
 			}
 			return true;
 		}

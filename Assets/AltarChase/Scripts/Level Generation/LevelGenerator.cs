@@ -11,9 +11,17 @@ namespace AltarChase.LevelGen
 {
     public class LevelGenerator : NetworkBehaviour
     {
+        [Header("Generation Settings")]
         [SerializeField] private float tileSize = 10;
         [SerializeField] private int numerOfTiles = 100;
         [SerializeField] private List<LevelTile> levelTiles;
+        [Header("Spawning Objects")] 
+        [SerializeField] private GameObject playerSpawnPoint;
+        [SerializeField] private int numberOfPlayerSpawnPoints;
+        [SerializeField] private List<GameObject> pickups;
+        [SerializeField] private int numberOfPickups;
+        [SerializeField] private GameObject idol;
+        [SerializeField] private GameObject exit;
 
         //use network server.spawn for instantiation.
         //all modules should have a network identity and all module prefabs should be in registered spawnable prefabs in the network manager. 
@@ -22,6 +30,8 @@ namespace AltarChase.LevelGen
         private Dictionary<TileShape, List<LevelTile>> levelTilesByConnectorData = new Dictionary<TileShape, List<LevelTile>>();
 
         private List<GameObject> spawnedTiles = new List<GameObject>();
+
+        private Dictionary<Vector3Int, GameObject> objectsToSpawnByTilePos = new Dictionary<Vector3Int, GameObject>();
 
     #region GenerateTiles
         
@@ -153,6 +163,29 @@ namespace AltarChase.LevelGen
                 List<LevelTile> possibleTiles = levelTilesByConnectorData[tileByGridPos.Value.connectorData.ThisTileShape];
                 tileByGridPos.Value.tileGameObject = possibleTiles[Random.Range(0, possibleTiles.Count)].gameObject;
             }
+
+            List<GameObject> allObjetsToSpawn = new List<GameObject>();
+            if(playerSpawnPoint)
+                for(int i = 0; i < numberOfPlayerSpawnPoints; i++)
+                    allObjetsToSpawn.Add(playerSpawnPoint);
+            if(pickups != null)
+            {
+                for(int i = 0; i < numberOfPickups; i++)
+                {
+                    int index = i % pickups.Count;
+                    if(pickups[index])
+                        allObjetsToSpawn.Add(pickups[index]);
+                }
+            }
+            if(idol)
+                allObjetsToSpawn.Add(idol);
+            if(exit)
+                allObjetsToSpawn.Add(exit);
+            
+            List<Vector3Int> shuffledSpawnPositions = closedPositions.OrderBy(x => Guid.NewGuid()).ToList();
+
+            for(int i = 0; i < allObjetsToSpawn.Count; i++)
+                objectsToSpawnByTilePos[shuffledSpawnPositions[i]] = allObjetsToSpawn[i];
         }
     #endregion
 
@@ -188,6 +221,10 @@ namespace AltarChase.LevelGen
                 GameObject tileGO = Instantiate(tileToPlace.tileGameObject, position, rotation, transform);
                 spawnedTiles.Add(tileGO);
                 NetworkServer.Spawn(tileGO);
+                if(objectsToSpawnByTilePos.ContainsKey(tileByGridPos.Key))
+                {
+                    tileGO.GetComponent<LevelTile>().SpawnObject(objectsToSpawnByTilePos[tileByGridPos.Key]);   
+                }
             }
         }
 

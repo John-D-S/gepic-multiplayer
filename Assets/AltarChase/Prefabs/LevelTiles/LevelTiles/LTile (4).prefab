@@ -947,6 +947,8 @@ MonoBehaviour:
   syncInterval: 0.1
   connectorData:
     tileShape: 1
+  spawnPosition: {x: -5, y: 0, z: -5}
+  spawnRotation: 45
 --- !u!114 &4930286933454358848
 MonoBehaviour:
   m_ObjectHideFlags: 0
