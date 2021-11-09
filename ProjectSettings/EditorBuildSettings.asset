@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AltarChase/Scenes/Online Scene.unity
     guid: 591ce19b9fecfd74082c994c694b87a5
+  - enabled: 1
+    path: Assets/AltarChase/Scenes/Lobby.unity
+    guid: dc5f9a09bde25f14ca10772e53910686
   m_configObjects: {}

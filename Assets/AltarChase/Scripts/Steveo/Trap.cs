@@ -125,7 +125,7 @@ namespace AltarChase
             _motor.StopPlayer();
             _motor.enabled = false;
             yield return new WaitForSeconds(playerDisableTime);
-            _interact.OnStartClient();
+            _interact.EnableMotor();
             NetworkServer.Destroy(gameObject);
         }
 

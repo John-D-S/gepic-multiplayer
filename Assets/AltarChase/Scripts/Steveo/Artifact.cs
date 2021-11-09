@@ -42,8 +42,9 @@ namespace AltarChase
 		public void RpcDropItem(PlayerInteract _interact)
 		{
 			Debug.Log("Dropping the artifact");
-			transform.position = _interact.itemDropLocation.position;
+			transform.position = _interact.transform.position;
 			transform.parent = null;
+			transform.Translate(_interact.itemDropLocation.position, Space.World);
 			_interact.artifact = null;
 			_interact.isHoldingArtifact = false;
 			isHeld = false;
