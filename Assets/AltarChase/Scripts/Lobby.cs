@@ -21,6 +21,7 @@ namespace Networking.Scripts
 	public class Lobby: MonoBehaviour
 	{
 		[SerializeField] private Button startButton;
+		[SerializeField] private TMP_InputField characterNameInput;
 		[SerializeField] private TMP_Dropdown characterDropdown;
 		[SerializeField] private List<Sprite> characterSprites = new List<Sprite>();
 		[SerializeField] private Image characterImage;
@@ -50,6 +51,12 @@ namespace Networking.Scripts
 			localPlayer.modelIndex = index;
 			localPlayer.CmdChangeModel(localPlayer.modelIndex);
 			characterImage.sprite = characterSprites[index];
+		}
+
+		public void CharacterName()
+		{
+			PlayerInteract localPlayer = CustomNetworkManager.LocalPlayer;
+			localPlayer.CmdCharacterName(characterNameInput.text);
 		}
 	}
 }

@@ -55,6 +55,7 @@ namespace AltarChase.Player
 
         [SerializeField] public int modelIndex = 0;
         [SerializeField] private List<GameObject> models = new List<GameObject>();
+        [SerializeField] public string characterName = null;
 
 
 
@@ -83,6 +84,21 @@ namespace AltarChase.Player
         {
 	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
 	        motor.enabled = isLocalPlayer;
+        }
+
+        [Command]
+        public void CmdCharacterName(string _name) => RpcCharacterName(_name);
+
+        [ClientRpc]
+        public void RpcCharacterName(string _name)
+        {
+	        CharacterName(_name);
+        }
+
+        public void CharacterName(string _name)
+        {
+	        characterName = _name;
+	        gameObject.name = _name;
         }
 
         public void ChangeModel(int _index)
