@@ -25,7 +25,7 @@ namespace AltarChase
 			{
 				NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
 				TargetSpeedBoost(identity.connectionToClient);
-				DestroyItem();
+				StartCoroutine(DestroyItem());
 			}
             
 		}
@@ -46,8 +46,10 @@ namespace AltarChase
 		}
 
 		[Server]
-		public void DestroyItem() => NetworkServer.Destroy(gameObject);
-
-
+		public IEnumerator DestroyItem()
+		{
+			yield return new WaitForSeconds(.1f);
+			NetworkServer.Destroy(gameObject);
+		}
 	}
 }

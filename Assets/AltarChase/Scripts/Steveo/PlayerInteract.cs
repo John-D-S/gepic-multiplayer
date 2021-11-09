@@ -1,4 +1,8 @@
+using AltarChase.Networking;
+
 using Mirror;
+
+using NetworkGame.Networking;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +11,7 @@ using TMPro;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace AltarChase.Player
 {
@@ -47,13 +52,18 @@ namespace AltarChase.Player
         [SerializeField] private GameObject artifactTest;
 
         [SerializeField] public float timeHeldArtifact = 0;
-        
+
+        [SerializeField] public int modelIndex = 0;
+        [SerializeField] private List<GameObject> models = new List<GameObject>();
+
 
 
         public override void OnStartClient()
         {
 	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
 	        motor.enabled = isLocalPlayer;
+	        
+	        CustomNetworkManager.AddPlayer(this);
 
 	        playerInput = GetComponent<PlayerInput>();
 	        playerCamera = FindObjectOfType<Camera>();
@@ -62,8 +72,48 @@ namespace AltarChase.Player
 
         }
 
-        
-        public void GetArtifact(GameObject _artifact)
+        public override void OnStartLocalPlayer()
+        {
+	        SceneManager.LoadSceneAsync("Lobby", LoadSceneMode.Additive);
+	        
+	        CmdAssignAuthority();
+        }
+
+        public void EnableMotor()
+        {
+	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
+	        motor.enabled = isLocalPlayer;
+        }
+
+        public void ChangeModel(int _index)
+        {
+	        foreach(GameObject model in models)
+	        {
+		        model.SetActive(false);
+	        }
+	        models[_index].SetActive(true);
+        }
+
+        [Command]
+        public void CmdChangeModel(int _index)
+        {
+	        RpcChangeModel(_index);
+        }
+
+        [ClientRpc]
+        public void RpcChangeModel(int _index)
+        {
+	        ChangeModel(_index);
+
+        }
+
+        [Command]
+        public void CmdAssignAuthority()
+        {
+	        MatchManager.instance.netIdentity.AssignClientAuthority(connectionToClient);
+        }
+
+		public void GetArtifact(GameObject _artifact)
         {
 	        isHoldingArtifact = true;
 	        artifact = _artifact.GetComponent<Artifact>();
@@ -154,8 +204,22 @@ namespace AltarChase.Player
 	        playerLight.enabled = isLightOn;
         }
 
+        public override void OnStopClient()
+        {
+	        CustomNetworkManager.RemovePlayer(this);
+        }
 
-
+        [Command]
+        public void CmdDropSpeed() => DropSpeed();
+        
+        [Server]
+        public void DropSpeed()
+        { 
+	        GameObject speed = Instantiate(speedBoost);
+	        NetworkServer.Spawn(speed);
+        }
+			
+			
         // Update is called once per frame
         void Update()
         {
@@ -180,8 +244,7 @@ namespace AltarChase.Player
 		        
 		        if(Input.GetKeyDown(KeyCode.Y))
 		        {
-			        GameObject speed = Instantiate(speedBoost);
-			        NetworkServer.Spawn(speed);
+			        CmdDropSpeed();
 		        }
 		        if(Input.GetKeyDown(KeyCode.Q))
 		        {

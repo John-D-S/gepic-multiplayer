@@ -1,3 +1,5 @@
+using AltarChase.Player;
+
 using JetBrains.Annotations;
 
 using System;
@@ -25,22 +27,23 @@ namespace AltarChase.Networking
 	    /// <summary> Attempts to find a player using the passed NetID, this can return null. </summary>
 	    /// <param name="_id">The NetID of the player that we are trying to find</param>
 	    [CanBeNull]
-	    public static NetworkPlayer FindPlayer(uint _id)
+	    public static PlayerInteract FindPlayer(uint _id)
 	    {
-		    Instance.players.TryGetValue(_id, out NetworkPlayer _player);
+		    Instance.players.TryGetValue(_id, out PlayerInteract _player);
 		    return _player;
 	    }
 
 	    /// <summary> Adds a player to the dictionary. </summary>
-	    public static void AddPlayer([NotNull] NetworkPlayer _player) => Instance.players.Add(_player.netId, _player);
+	    public static void AddPlayer([NotNull] PlayerInteract _player) => Instance.players.Add(_player.netId, _player);
 
 	    /// <summary> removes a player from the dictionary. </summary>
 	    /// <param name="_player"></param>
-	    public static void RemovePlayer([NotNull] NetworkPlayer _player) => Instance.players.Remove(_player.netId);
+	    public static void RemovePlayer([NotNull] PlayerInteract _player) => Instance.players.Remove(_player.netId);
 	    
-	    private static NetworkPlayer localPlayer = null;
+	    private static PlayerInteract localPlayer = null;
+	    
 	    /// <summary> A reference to the localplayer of the game. </summary>
-	    private static NetworkPlayer LocalPlayer
+	    public static PlayerInteract LocalPlayer
 	    {
 		    get
 		    {
@@ -48,7 +51,7 @@ namespace AltarChase.Networking
 			    if(localPlayer == null)
 			    {
 				    // loop through each player in the game and check if it is a local player
-				    foreach(NetworkPlayer networkPlayer in Instance.players.Values)
+				    foreach(PlayerInteract networkPlayer in Instance.players.Values)
 				    {
 					    if(networkPlayer.isLocalPlayer)
 					    {
@@ -68,7 +71,7 @@ namespace AltarChase.Networking
 
 	    public CustomNetworkDiscovery discovery;
 
-	    private readonly Dictionary<uint, NetworkPlayer> players = new Dictionary<uint, NetworkPlayer>();
+	    private readonly Dictionary<uint, PlayerInteract> players = new Dictionary<uint, PlayerInteract>();
 	    
 	    /// <summary>
 	    /// This is invoked when a host is started.

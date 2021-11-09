@@ -1137,6 +1137,10 @@ PrefabInstance:
       propertyPath: offlineScene
       value: Assets/AltarChase/Scenes/MainMenu.unity
       objectReference: {fileID: 0}
+    - target: {fileID: 1722840403432052350, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 8308240217357903040, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2568,7 +2572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6320602779587773484, guid: 4929dde8f22e4df49ba942cf930918f8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.6939
+      value: 4.6939087
       objectReference: {fileID: 0}
     - target: {fileID: 6320602779587773484, guid: 4929dde8f22e4df49ba942cf930918f8, type: 3}
       propertyPath: m_AnchoredPosition.y
