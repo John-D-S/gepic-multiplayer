@@ -32,26 +32,33 @@ namespace AltarChase
         [Server]
         private void OnTriggerEnter(Collider _collider)
         {
-            if(isSet)
+            
+            if(_collider.CompareTag("Player"))
             {
-                uint id = _collider.gameObject.GetComponent<NetworkIdentity>().netId;
-                if(id != trapID) 
+                // Check for the player object so no errors from wall or floor colliders
+                if(isSet)
                 {
-                    PlayerMotor motor = _collider.GetComponent<PlayerMotor>();
-                    if(motor != null)
+                    // Gets the player ID then checks it to the traps ID
+                    uint id = _collider.gameObject.GetComponent<NetworkIdentity>().netId;
+                    if(id != trapID)
                     {
-                        RpcHitTrap();
-                        
-                        NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
+                        PlayerMotor motor = _collider.GetComponent<PlayerMotor>();
+                        if(motor != null)
+                        {
+                            RpcHitTrap();
 
-                        TargetDisablePlayer(identity.connectionToClient, _collider.gameObject);
+                            NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
+
+                            TargetDisablePlayer(identity.connectionToClient, _collider.gameObject);
+                        }
                     }
                 }
+                else
+                {
+                    RpcPickUpTrap(_collider.gameObject);
+                }
             }
-            else
-            {
-                RpcPickUpTrap(_collider.gameObject);
-            }
+            
         }
 
         /// <summary>
@@ -75,10 +82,12 @@ namespace AltarChase
         public void RpcHitTrap()
         {
             //todo trap animation here instead of turning off the renderer
-            
-            rend.enabled = false;
-            proximityRend.enabled = false;
-            trapCollider.enabled = false;
+            if(rend != null)
+                rend.enabled = false;
+            if(proximityRend != null)
+                proximityRend.enabled = false;
+            if(trapCollider != null)
+                trapCollider.enabled = false;
         }
 
         
@@ -92,6 +101,11 @@ namespace AltarChase
         {
             PlayerMotor motor = _target.identity.gameObject.GetComponent<PlayerMotor>();
             PlayerInteract interact = _target.identity.GetComponent<PlayerInteract>();
+
+            if(interact.artifact != null)
+            {
+                interact.CmdDropArtifact(interact.artifact.gameObject);
+            }
             
             // todo Drop the artifact if holding it.
             
@@ -122,5 +136,9 @@ namespace AltarChase
             trapCollider = GetComponent<SphereCollider>();
         }
 
+        public override void OnStartServer()
+        {
+            Start();
+        }
     }
 }

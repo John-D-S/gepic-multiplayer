@@ -2,7 +2,11 @@ using Mirror;
 
 using System.Collections;
 using System.Collections.Generic;
+
+using TMPro;
+
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AltarChase.Player
 {
@@ -21,13 +25,29 @@ namespace AltarChase.Player
          * drop artifact
          * WIN
          * LOOSE ??
-         * MOBILE INPUT - onscreen buttons for trap setting.
          */
 
         [SerializeField] private GameObject trapPrefab;
 
         [SerializeField] public int trapCount = 0;
+        [SerializeField] private TMP_Text trapCountHud;
         public uint netID = 0;
+
+        [SerializeField] private Light playerLight;
+        private bool isLightOn = true;
+
+        [SerializeField] private GameObject speedBoost;
+        private PlayerInput playerInput;
+
+        public bool isHoldingArtifact;
+        [SerializeField] public Transform itemLocation;
+        [SerializeField] public Transform itemDropLocation;
+        [SerializeField] public Artifact artifact = null;
+
+        [SerializeField] private GameObject artifactTest;
+
+        [SerializeField] public float timeHeldArtifact = 0;
+        
 
 
         public override void OnStartClient()
@@ -35,9 +55,49 @@ namespace AltarChase.Player
 	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
 	        motor.enabled = isLocalPlayer;
 
+	        playerInput = GetComponent<PlayerInput>();
 	        playerCamera = FindObjectOfType<Camera>();
 	        netID = gameObject.GetComponent<NetworkIdentity>().netId;
+	        trapCountHud = FindObjectOfType<TMP_Text>();
 
+        }
+
+        
+        public void GetArtifact(GameObject _artifact)
+        {
+	        isHoldingArtifact = true;
+	        artifact = _artifact.GetComponent<Artifact>();
+        }
+
+        [ClientRpc]
+        public void RpcDropArtifact()
+        {
+	        if(artifact != null)
+	        {
+		        artifact.gameObject.transform.parent = null;
+
+		        artifact.gameObject.transform.position = itemDropLocation.position;
+		        artifact.isHeld = false;
+		        artifact = null;
+	        }
+        }
+
+        [Command]
+        public void CmdDropArtifact(GameObject _artifact)
+        {
+	        artifact = _artifact.GetComponent<Artifact>();
+	        artifact.RpcDropItem(this);
+        }
+
+
+        /// <summary>
+        /// The command for the Drop trap function
+        /// </summary>
+        [Command]
+        public void CmdDropTrap()
+        {
+	        DropTrap();
+	        
         }
 
         /// <summary>
@@ -65,8 +125,7 @@ namespace AltarChase.Player
 		        // Give trap the ID of the player and set it.
 		        trap.trapID = netID;
 		        trap.isSet = true;
-		        // Minus 1 from the trap count.
-		        trapCount -= 1;
+		        
 		        NetworkServer.Spawn(droppedTrap);
 	        }
 	        else
@@ -74,27 +133,29 @@ namespace AltarChase.Player
 		        Debug.Log("No Traps left.");
 		        // todo UI feedback, no traps. Will need to be called in an RPC.
 	        }
-	        
-	         
-        }
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-        
         }
 
         /// <summary>
-        /// The command for the Drop trap function
+        /// The command for the players lights on and off.
         /// </summary>
         [Command]
-        public void CmdDropTrap()
+        public void CmdTurnOffLight()
         {
-	        DropTrap();
+	        RpcTurnOffLight();
+        }
+        
+        /// <summary>
+        /// The RPC for turning on and off the players lights
+        /// </summary>
+        [ClientRpc]
+        private void RpcTurnOffLight()
+        {
+	        isLightOn = !isLightOn;
+	        playerLight.enabled = isLightOn;
         }
 
-        
-        
+
+
         // Update is called once per frame
         void Update()
         {
@@ -103,10 +164,44 @@ namespace AltarChase.Player
 		        playerCamera.transform.position = transform.position + camOffset;
 		        playerCamera.transform.LookAt(transform.position);
 		        
-		        if(Input.GetKeyDown(KeyCode.Space))
+		        if(Input.GetKeyDown(KeyCode.Space) || (playerInput.actions["Drop Trap"].triggered))
 		        {
-			        CmdDropTrap();
+			        if(trapCount > 0)
+			        {
+				        trapCount -= 1;
+						CmdDropTrap();
+			        }
 		        }
+		        
+		        if(Input.GetKeyDown(KeyCode.E) || (playerInput.actions["Light"].triggered))
+		        {
+			        CmdTurnOffLight();
+		        }
+		        
+		        if(Input.GetKeyDown(KeyCode.Y))
+		        {
+			        GameObject speed = Instantiate(speedBoost);
+			        NetworkServer.Spawn(speed);
+		        }
+		        if(Input.GetKeyDown(KeyCode.Q))
+		        {
+			        GameObject art = Instantiate(artifactTest);
+			        NetworkServer.Spawn(art);
+		        }
+		        if(Input.GetKeyDown(KeyCode.P))
+		        {
+			        if(artifact != null)
+			        {
+						CmdDropArtifact(artifact.gameObject);
+				        
+			        }
+		        }
+
+		        if(isHoldingArtifact)
+			        timeHeldArtifact += Time.deltaTime;
+
+		        if(trapCountHud != null)
+			        trapCountHud.text = trapCount.ToString();
 	        }
         }
     }
