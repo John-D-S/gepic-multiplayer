@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 565724074992383292}
   - component: {fileID: 565724074992383293}
+  - component: {fileID: 5450171762597789837}
   m_Layer: 0
   m_Name: FourWayTile (1)
   m_TagString: Untagged
@@ -64,8 +65,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4006f60049aa2814aab04b07693cc35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   connectorData:
     tileShape: 4
+  spawnPosition: {x: 6, y: 0, z: -1.5}
+  spawnRotation: 0
+--- !u!114 &5450171762597789837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565724074992383295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 8a6b036b74f0fdb43a46310a645cf6da
+  hasSpawned: 0
 --- !u!65 &565724076677920692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1292,14 +1314,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74e9efe47b9b115499f9572aa800b0d8, type: 3}
---- !u!1 &799585597042526753 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 74e9efe47b9b115499f9572aa800b0d8, type: 3}
-  m_PrefabInstance: {fileID: 565724076340950896}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &23470663449530523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 74e9efe47b9b115499f9572aa800b0d8, type: 3}
+  m_PrefabInstance: {fileID: 565724076340950896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &799585597042526753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 74e9efe47b9b115499f9572aa800b0d8, type: 3}
   m_PrefabInstance: {fileID: 565724076340950896}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &565724076441346560

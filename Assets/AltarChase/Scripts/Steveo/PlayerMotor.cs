@@ -100,5 +100,5 @@ namespace AltarChase.Player
             }
         }
 
-        }
+    }
 }
