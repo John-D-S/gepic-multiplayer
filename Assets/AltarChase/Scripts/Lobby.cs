@@ -21,6 +21,7 @@ namespace Networking.Scripts
 	public class Lobby: MonoBehaviour
 	{
 		[SerializeField] private Button startButton;
+		[Header("Character Variables")]
 		[SerializeField] private TMP_InputField characterNameInput;
 		[SerializeField] private TMP_Dropdown characterDropdown;
 		[SerializeField] private List<Sprite> characterSprites = new List<Sprite>();
@@ -35,9 +36,10 @@ namespace Networking.Scripts
 
 		public void OnClickStartMatch()
 		{
+			
 			PlayerInteract localPlayer = CustomNetworkManager.LocalPlayer;
-			localPlayer.modelIndex = index;
-			localPlayer.CmdChangeModel(localPlayer.modelIndex);
+			// localPlayer.modelIndex = index;
+			// localPlayer.CmdChangeModel(localPlayer.modelIndex);
 			
 			MatchManager.instance.StartMatch();
 			
@@ -57,7 +59,7 @@ namespace Networking.Scripts
 		}
 
 		/// <summary>
-		/// Calls functions on the player to change name.
+		/// Calls functions on the player to change character name.
 		/// </summary>
 		public void CharacterName()
 		{

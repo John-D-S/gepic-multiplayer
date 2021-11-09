@@ -104,7 +104,7 @@ namespace AltarChase
 
             if(interact.artifact != null)
             {
-               
+                interact.CmdGetDropLocation();
                 interact.CmdDropArtifact(interact.artifact.gameObject);
             }
             
