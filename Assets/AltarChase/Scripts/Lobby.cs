@@ -8,6 +8,7 @@ using Mirror;
 using NetworkGame.Networking;
 
 using System;
+using System.Collections.Generic;
 
 using TMPro;
 
@@ -21,6 +22,8 @@ namespace Networking.Scripts
 	{
 		[SerializeField] private Button startButton;
 		[SerializeField] private TMP_Dropdown characterDropdown;
+		[SerializeField] private List<Sprite> characterSprites = new List<Sprite>();
+		[SerializeField] private Image characterImage;
 		[SerializeField] private int index = 0;
 		
 		private void Awake()
@@ -46,6 +49,7 @@ namespace Networking.Scripts
 			PlayerInteract localPlayer = CustomNetworkManager.LocalPlayer;
 			localPlayer.modelIndex = index;
 			localPlayer.CmdChangeModel(localPlayer.modelIndex);
+			characterImage.sprite = characterSprites[index];
 		}
 	}
 }
