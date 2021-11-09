@@ -44,6 +44,9 @@ namespace Networking.Scripts
 			gameObject.SetActive(false);
 		}
 
+		/// <summary>
+		/// Calls functions on the player to change the character model.
+		/// </summary>
 		public void CharacterChoice()
 		{
 			index = characterDropdown.value;
@@ -53,6 +56,9 @@ namespace Networking.Scripts
 			characterImage.sprite = characterSprites[index];
 		}
 
+		/// <summary>
+		/// Calls functions on the player to change name.
+		/// </summary>
 		public void CharacterName()
 		{
 			PlayerInteract localPlayer = CustomNetworkManager.LocalPlayer;
