@@ -1,0 +1,82 @@
+﻿using Mirror;
+using TMPro;
+using UnityEngine;
+
+namespace AltarChase.Scripts.Xavier_Scripts
+{
+    public class CountdownTimer : MonoBehaviour
+    {
+        [Header("Timer Set")]
+        [SerializeField,SyncVar] private float timeRemaining = 10;
+
+        // private ItemManager _itemManager;
+        [SyncVar] private float minutes;
+        [SyncVar] private float seconds;
+        public TextMeshProUGUI timer;
+  
+        [SyncVar]public bool timerRunning = false;
+   
+   
+        private void Start()
+        {
+            //_itemManager = FindObjectOfType<ItemManager>();
+            timerRunning = false;
+        }
+   
+        private void Update()
+        {
+            if(timerRunning)
+            {
+                TimeOnEveryone();
+            }
+        }
+   
+        
+        /// <summary>
+        /// This is the function that will be called in every client version.
+        /// </summary>
+        void TimeOnEveryone()
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                ServerDisplayTime(timeRemaining);
+            }
+            else
+            {
+                Debug.LogError("Time has ran out!");
+                if (timerRunning)
+                {
+                    //_itemManager.RpcPopupText("Time has ran out!");
+                    timeRemaining = 0;
+                    timerRunning = false;
+                }
+                timer.text = "0:00";
+            }
+        }
+   
+        /// <summary>
+        /// And here is how we display the time ACCURATELY in the game for every player.
+        /// </summary>
+        /// <param name="timeToDisplay"> This float value can be changed and then turned into minutes and seconds!</param>
+        void ServerDisplayTime(float timeToDisplay)
+        {
+            minutes = Mathf.FloorToInt(timeToDisplay / 60); 
+            seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+
+        /// <summary>
+        ///  Same thing as server OLD CODE!
+        /// </summary>
+        /// <param name="_timeToDisplay"></param>
+        void ClientDisplayTime(float _timeToDisplay)
+        {
+            float minutes = Mathf.FloorToInt(_timeToDisplay / 60);
+            float seconds = Mathf.FloorToInt(_timeToDisplay % 60);
+
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+    }
+}
