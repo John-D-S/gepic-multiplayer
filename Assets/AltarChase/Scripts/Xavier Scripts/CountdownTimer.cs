@@ -9,7 +9,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
         [Header("Timer Set")]
         [SerializeField,SyncVar] private float timeRemaining = 10;
 
-        // private ItemManager _itemManager;
+        private Popup _popup;
         [SyncVar] private float minutes;
         [SyncVar] private float seconds;
         public TextMeshProUGUI timer;
@@ -19,7 +19,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
    
         private void Start()
         {
-            //_itemManager = FindObjectOfType<ItemManager>();
+            _popup = FindObjectOfType<Popup>();
             timerRunning = false;
         }
    
@@ -47,7 +47,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
                 Debug.LogError("Time has ran out!");
                 if (timerRunning)
                 {
-                    //_itemManager.RpcPopupText("Time has ran out!");
+                    _popup.RpcPopupText("Time has ran out!");
                     timeRemaining = 0;
                     timerRunning = false;
                 }
