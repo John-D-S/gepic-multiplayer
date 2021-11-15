@@ -63,7 +63,7 @@ namespace AltarChase
 			
 			if(!IPAddress.TryParse(address, out IPAddress ipAddress))
 			{
-				Debug.LogError($"Invalid IP: {address}");
+				Debug.Log($"Invalid IP: {address}");
 				address = "localhost";
 			}
 			

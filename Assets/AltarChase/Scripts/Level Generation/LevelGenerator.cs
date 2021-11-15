@@ -223,7 +223,8 @@ namespace AltarChase.LevelGen
                 NetworkServer.Spawn(tileGO);
                 if(objectsToSpawnByTilePos.ContainsKey(tileByGridPos.Key))
                 {
-                    tileGO.GetComponent<LevelTile>().SpawnObject(objectsToSpawnByTilePos[tileByGridPos.Key]);   
+                    GameObject gameObjectToSpawn = objectsToSpawnByTilePos[tileByGridPos.Key];
+                    tileGO.GetComponent<LevelTile>().SpawnObject(gameObjectToSpawn);
                 }
             }
         }
