@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AltarChase.Scripts.Xavier_Scripts
 {
-    public class CountdownTimer : MonoBehaviour
+    public class CountdownTimer : NetworkBehaviour
     {
         [Header("Timer Set")]
         [SerializeField,SyncVar] private float timeRemaining = 10;
