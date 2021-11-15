@@ -22,6 +22,7 @@ namespace AltarChase
 		{
 			if(_collider.CompareTag("Player") && !isHeld)
 			{
+				FindObjectOfType<Popup>().RpcPopupText("Artifact has been grabbed!");
 				isHeld = true;
 				NetworkIdentity identity = _collider.GetComponent<NetworkIdentity>();
 				PlayerInteract interact = identity.gameObject.GetComponent<PlayerInteract>();
