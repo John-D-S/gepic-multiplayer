@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4990817744481860415}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 6936148308338220567}
   - {fileID: 6525560563415263452}
   m_Father: {fileID: 9022453017182460187}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249359385449058114
 GameObject:
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 593973389877155320}
   - component: {fileID: 4580702003753556573}
   - component: {fileID: 1762345040014110359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4086176897758374235}
   - component: {fileID: 6722137930096773941}
   - component: {fileID: 1974869310076376232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_knightHelmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 2999756522849328884}
   - component: {fileID: 8036780304656479189}
   - component: {fileID: 5407245564668719135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_rogueArmRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,6 +288,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &538414540843594551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3912613272793516266}
+  m_Layer: 6
+  m_Name: Item Drop Location Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3912613272793516266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538414540843594551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2, y: -0.384, z: -0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9022453017182460187}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1304519513656166897
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +329,7 @@ GameObject:
   - component: {fileID: 4160017584822665625}
   - component: {fileID: 9012729327064913092}
   - component: {fileID: 1366953506475366205}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_knightArmRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +412,7 @@ GameObject:
   - component: {fileID: 2923796147607136914}
   - component: {fileID: 1576881754825250900}
   - component: {fileID: 3849082643030265152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_barbarianHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +496,7 @@ GameObject:
   - component: {fileID: 3420651641878358939}
   - component: {fileID: 8446944984507282465}
   - component: {fileID: 9070410382174314690}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_mageHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,6 +567,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3141891037895771816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7884517988301955280}
+  m_Layer: 6
+  m_Name: RayOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7884517988301955280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3141891037895771816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.087, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9022453017182460187}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3556835831821330056
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +608,7 @@ GameObject:
   - component: {fileID: 8601660826814003290}
   - component: {fileID: 6792954276326037952}
   - component: {fileID: 3565769855186910551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_barbarianArmLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +693,7 @@ GameObject:
   - component: {fileID: 8298663445751111740}
   - component: {fileID: 5123383743867730273}
   - component: {fileID: 4259944888294840643}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_mageHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +777,7 @@ GameObject:
   - component: {fileID: 6929397038996044586}
   - component: {fileID: 9174041534917655054}
   - component: {fileID: 8423146977769417073}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_rogueHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +859,7 @@ GameObject:
   - component: {fileID: 5054086784646545340}
   - component: {fileID: 8891598474371826062}
   - component: {fileID: 4460805407668263293}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -891,7 +951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1138963999035009067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item Holding Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +983,7 @@ GameObject:
   - component: {fileID: 8729205982740725079}
   - component: {fileID: 2255016832412738254}
   - component: {fileID: 5748258019681764474}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_barbarianHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1006,7 +1066,7 @@ GameObject:
   - component: {fileID: 4011895579005201236}
   - component: {fileID: 780999682139377}
   - component: {fileID: 2875039396683272251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1094,7 +1154,7 @@ GameObject:
   - component: {fileID: 689663552916170755}
   - component: {fileID: 4871020772171215603}
   - component: {fileID: 3720721313014743915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_barbarianArmRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1179,7 +1239,7 @@ GameObject:
   - component: {fileID: 906816010445612013}
   - component: {fileID: 2229425261388807091}
   - component: {fileID: 2518386402067348524}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_knightArmLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,6 +1311,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5773216254895837556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789693362415152800}
+  m_Layer: 6
+  m_Name: Item Drop Location forward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789693362415152800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5773216254895837556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.384, z: 1.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9022453017182460187}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5892012808859185766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1352,7 @@ GameObject:
   - component: {fileID: 6525560563415263452}
   - component: {fileID: 7863471142271788921}
   - component: {fileID: 5387534539376939955}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_rogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1349,7 +1439,7 @@ GameObject:
   - component: {fileID: 85812163056630303}
   - component: {fileID: 5308521026910701078}
   - component: {fileID: 567901296277032871}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_mageArnLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1431,7 +1521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5115646228950001563}
   - component: {fileID: 6039167290570098433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1525,7 +1615,7 @@ GameObject:
   - component: {fileID: 6248828686468048638}
   - component: {fileID: 8489985347114520027}
   - component: {fileID: 3766553066967571446}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_mageArmRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1608,7 +1698,7 @@ GameObject:
   - component: {fileID: 1870822664379832342}
   - component: {fileID: 3808097603708503947}
   - component: {fileID: 6143689062797753265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_rogueHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1691,7 +1781,7 @@ GameObject:
   - component: {fileID: 1557060616254830590}
   - component: {fileID: 7333854157767413179}
   - component: {fileID: 4960994573672829705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_mageHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1774,7 +1864,7 @@ GameObject:
   - component: {fileID: 6398622337980820881}
   - component: {fileID: 6308335017168262268}
   - component: {fileID: 1136600325702342070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_rogueArmLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1857,7 +1947,7 @@ GameObject:
   - component: {fileID: 6936148308338220567}
   - component: {fileID: 6335999210481127858}
   - component: {fileID: 8072995900457411960}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_barbarian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1934,6 +2024,66 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7910143909848520189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4110899519598729158}
+  m_Layer: 6
+  m_Name: Item Drop Location Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4110899519598729158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910143909848520189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2, y: -0.384, z: -0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9022453017182460187}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7968169125456691718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4171173787785161554}
+  m_Layer: 6
+  m_Name: Item Drop Location Back
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4171173787785161554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968169125456691718}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.384, z: -1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9022453017182460187}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7975114527840692055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,7 +2095,7 @@ GameObject:
   - component: {fileID: 6988684581979124610}
   - component: {fileID: 2556772177974343717}
   - component: {fileID: 635589430728741204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_knightHelmetVisor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2025,7 +2175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442339938478048603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item Drop Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2040,7 +2190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8443339865494005001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.859}
+  m_LocalPosition: {x: 0, y: -0.384, z: 1.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9022453017182460187}
@@ -2057,7 +2207,7 @@ GameObject:
   - component: {fileID: 8571262347983570311}
   - component: {fileID: 5584201666749342736}
   - component: {fileID: 3899991450773233410}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: character_knightHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2148,7 +2298,7 @@ GameObject:
   - component: {fileID: 1731764962}
   - component: {fileID: 1731764961}
   - component: {fileID: 8257904166490368067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player New
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2170,7 +2320,12 @@ Transform:
   - {fileID: 8054217892360854956}
   - {fileID: 1138963999035009067}
   - {fileID: 1442339938478048603}
+  - {fileID: 1789693362415152800}
+  - {fileID: 4171173787785161554}
+  - {fileID: 3912613272793516266}
+  - {fileID: 4110899519598729158}
   - {fileID: 4990817744481860415}
+  - {fileID: 7884517988301955280}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2293,6 +2448,11 @@ MonoBehaviour:
   isHoldingArtifact: 0
   itemLocation: {fileID: 1138963999035009067}
   itemDropLocation: {fileID: 1442339938478048603}
+  itemDropLocationBack: {fileID: 4171173787785161554}
+  itemDropLocationForward: {fileID: 1789693362415152800}
+  itemDropLocationRight: {fileID: 3912613272793516266}
+  itemDropLocationLeft: {fileID: 4110899519598729158}
+  rayOrigin: {fileID: 7884517988301955280}
   artifact: {fileID: 0}
   artifactTest: {fileID: 2445625172369103156, guid: 80b25ea3a0c27e34a85061434f98f63f, type: 3}
   timeHeldArtifact: 0
@@ -2302,6 +2462,7 @@ MonoBehaviour:
   - {fileID: 4388420739722703342}
   - {fileID: 7712966933059814573}
   - {fileID: 5892012808859185766}
+  characterName: 
 --- !u!114 &1731764962
 MonoBehaviour:
   m_ObjectHideFlags: 0

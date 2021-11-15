@@ -46,7 +46,12 @@ namespace AltarChase.Player
 
         public bool isHoldingArtifact;
         [SerializeField] public Transform itemLocation;
-        [SerializeField] public Transform itemDropLocation;
+        [SerializeField] public Transform itemDropLocation = null;
+        [SerializeField] public Transform itemDropLocationBack;
+        [SerializeField] public Transform itemDropLocationForward;
+        [SerializeField] public Transform itemDropLocationRight;
+        [SerializeField] public Transform itemDropLocationLeft;
+        [SerializeField] public Transform rayOrigin;
         [SerializeField] public Artifact artifact = null;
 
         [SerializeField] private GameObject artifactTest;
@@ -55,6 +60,7 @@ namespace AltarChase.Player
 
         [SerializeField] public int modelIndex = 0;
         [SerializeField] private List<GameObject> models = new List<GameObject>();
+        [SerializeField] public string characterName = null;
 
 
 
@@ -83,6 +89,21 @@ namespace AltarChase.Player
         {
 	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
 	        motor.enabled = isLocalPlayer;
+        }
+
+        [Command]
+        public void CmdCharacterName(string _name) => RpcCharacterName(_name);
+
+        [ClientRpc]
+        public void RpcCharacterName(string _name)
+        {
+	        CharacterName(_name);
+        }
+
+        public void CharacterName(string _name)
+        {
+	        characterName = _name;
+	        gameObject.name = _name;
         }
 
         public void ChangeModel(int _index)
@@ -135,11 +156,49 @@ namespace AltarChase.Player
         [Command]
         public void CmdDropArtifact(GameObject _artifact)
         {
+	        
 	        artifact = _artifact.GetComponent<Artifact>();
-	        artifact.RpcDropItem(this);
+	        artifact.RpcDropItem(this.gameObject);
+	        Debug.Log(itemDropLocation);
         }
 
+        [Command]
+        public void CmdGetDropLocation() => RpcGetDropLocation();
 
+        [ClientRpc]
+        public void RpcGetDropLocation() => GetDropLocation();
+
+        
+        public void GetDropLocation()
+        {
+	        Debug.DrawRay(rayOrigin.position, transform.forward * 1.23f, Color.cyan, 6);
+	        if(Physics.Raycast(rayOrigin.position, transform.forward, 1.23f))
+	        {
+		        if(Physics.Raycast(rayOrigin.position, -transform.forward, 1.23f))
+		        {
+			        itemDropLocation = itemDropLocationLeft;
+			        return;
+		        }
+		        
+		        itemDropLocation = itemDropLocationBack;
+		        return;
+	        }
+
+	        if(Physics.Raycast(rayOrigin.position, -transform.forward, 1.23f))
+	        {
+		        itemDropLocation = itemDropLocationForward;
+		        return;
+	        }
+	        
+	        // if(!Physics.Raycast(transform.position, -transform.forward,3f,6))
+		       //  return itemDropLocationForward;
+	        // if(Physics.Raycast(rayOrigin.position, -transform.forward,1.2f) && Physics.Raycast(rayOrigin.position, transform.forward,1.2f))
+		       //   return itemDropLocationLeft;
+	        // if(!Physics.Raycast(transform.position, -transform.right,3f,6))
+		       //  return itemDropLocationRight;
+	        itemDropLocation = itemDropLocationForward;
+        }
+        
         /// <summary>
         /// The command for the Drop trap function
         /// </summary>
@@ -255,6 +314,7 @@ namespace AltarChase.Player
 		        {
 			        if(artifact != null)
 			        {
+				        CmdGetDropLocation();
 						CmdDropArtifact(artifact.gameObject);
 				        
 			        }
