@@ -27,7 +27,7 @@ namespace AltarChase.LevelGen
 
         public void SpawnObject(GameObject _gameObject)
         {
-            GameObject spawnedGO = Instantiate(_gameObject, transform.position + transform.rotation * spawnPosition, Quaternion.Euler(0,transform.rotation.y + spawnRotation,0), transform);
+            GameObject spawnedGO = Instantiate(_gameObject, transform.position + transform.rotation * spawnPosition, Quaternion.Euler(0,transform.rotation.y + spawnRotation,0));
             NetworkServer.Spawn(spawnedGO);
         }
         
