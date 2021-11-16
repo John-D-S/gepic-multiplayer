@@ -41,7 +41,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 isPaused = true;
-                if (isPaused)
+                if (!isPaused)
                 {
                     Resume();
                 }
@@ -55,14 +55,12 @@ namespace AltarChase.Scripts.Xavier_Scripts
         public void Resume()
         {
             pausemenuUI.SetActive(false);
-            Time.timeScale = 1f;
             isPaused = false;
         }
 
         void Pause()
         {
             pausemenuUI.SetActive(true);
-            Time.timeScale = 0f;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             isPaused = true;
