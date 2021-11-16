@@ -244,14 +244,24 @@ namespace AltarChase.Player
 		        // Give trap the ID of the player and set it.
 		        trap.trapID = netID;
 		        trap.isSet = true;
-		        
+		        // trap.rend.material.color = Color.red;
+		        // trap.trapLight.SetActive(false);
 		        NetworkServer.Spawn(droppedTrap);
+		        RpcSetTrap(droppedTrap);
 	        }
 	        else
 	        {
 		        Debug.Log("No Traps left.");
 		        // todo UI feedback, no traps. Will need to be called in an RPC.
 	        }
+        }
+
+        [ClientRpc]
+        public void RpcSetTrap(GameObject _trap)
+        {
+	        Trap trap = _trap.GetComponent<Trap>();
+	        trap.rend.material.color = Color.red;
+	        trap.trapLight.SetActive(false);
         }
 
         /// <summary>
@@ -262,7 +272,7 @@ namespace AltarChase.Player
         {
 	        RpcTurnOffLight();
         }
-        
+
         /// <summary>
         /// The RPC for turning on and off the players lights
         /// </summary>
@@ -314,25 +324,25 @@ namespace AltarChase.Player
 				        
 			        }
 		        }
-		        
-		        if(Input.GetKeyDown(KeyCode.Y))
-		        {
-			        CmdDropSpeed();
-		        }
-		        if(Input.GetKeyDown(KeyCode.Q))
-		        {
-			        GameObject art = Instantiate(artifactTest);
-			        NetworkServer.Spawn(art);
-		        }
-		        if(Input.GetKeyDown(KeyCode.P))
-		        {
-			        if(artifact != null)
-			        {
-				        CmdGetDropLocation();
-						CmdDropArtifact(artifact.gameObject);
-				        
-			        }
-		        }
+		        // This was all for testing.
+		    //     if(Input.GetKeyDown(KeyCode.Y))
+		    //     {
+			   //      CmdDropSpeed();
+		    //     }
+		    //     if(Input.GetKeyDown(KeyCode.Q))
+		    //     {
+			   //      GameObject art = Instantiate(artifactTest);
+			   //      NetworkServer.Spawn(art);
+		    //     }
+		    //     if(Input.GetKeyDown(KeyCode.P))
+		    //     {
+			   //      if(artifact != null)
+			   //      {
+				  //       CmdGetDropLocation();
+						// CmdDropArtifact(artifact.gameObject);
+				  //       
+			   //      }
+		    //     }
 
 		        if(isHoldingArtifact)
 			        timeHeldArtifact += Time.deltaTime;

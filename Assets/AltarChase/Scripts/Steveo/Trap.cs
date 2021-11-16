@@ -21,9 +21,10 @@ namespace AltarChase
         [SerializeField, Tooltip("The amount of time in seconds the player is disabled when hitting the trap.")] 
         private float playerDisableTime = 5;
 
-        private MeshRenderer rend;
+        public MeshRenderer rend;
         [SerializeField] private MeshRenderer proximityRend;
         private SphereCollider trapCollider;
+        public GameObject trapLight;
 
         /// <summary>
         /// This is the Ontrigger for the trap and is running on the server.
@@ -130,6 +131,7 @@ namespace AltarChase
             NetworkServer.Destroy(gameObject);
         }
 
+        
         // Start is called before the first frame update
         void Start()
         {
