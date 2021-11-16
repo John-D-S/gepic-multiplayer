@@ -284,8 +284,8 @@ namespace AltarChase.Player
         {
 	        if(isLocalPlayer)
 	        {
-		        playerCamera.transform.position = transform.position + camOffset;
-		        playerCamera.transform.LookAt(transform.position);
+		        playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, transform.position + camOffset, 0.025f);
+		        playerCamera.transform.LookAt(transform.position, Vector3.forward);
 		        
 		        if(Input.GetKeyDown(KeyCode.Space) || (playerInput.actions["Drop Trap"].triggered))
 		        {
