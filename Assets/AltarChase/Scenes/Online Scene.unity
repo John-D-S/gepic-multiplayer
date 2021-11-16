@@ -1025,6 +1025,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -38.030884
       objectReference: {fileID: 0}
+    - target: {fileID: 1240099030726852266, guid: c7c0368d890a8d44cb8fda2374e0339e, type: 3}
+      propertyPath: pausemenuMOBILEUI
+      value: 
+      objectReference: {fileID: 536688790614424871}
+    - target: {fileID: 7833636782727224400, guid: c7c0368d890a8d44cb8fda2374e0339e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7833636782727224407, guid: c7c0368d890a8d44cb8fda2374e0339e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1630,10 +1638,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 551674050}
     m_Modifications:
-    - target: {fileID: 536688792423324327, guid: fe3a84095faf5b84ba0b7a7d07981e6f, type: 3}
-      propertyPath: pausemenuMOBILEUI
-      value: 
-      objectReference: {fileID: 536688790614424871}
     - target: {fileID: 1708133605531887411, guid: fe3a84095faf5b84ba0b7a7d07981e6f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

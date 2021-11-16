@@ -273,6 +273,7 @@ MonoBehaviour:
   masterVolume: {fileID: 7653760017156442312}
   sfxVolumeSlider: {fileID: 7653760017888857605}
   pausemenuUI: {fileID: 3080295430629869354}
+  pausemenuMOBILEUI: {fileID: 1708133605531887412}
 --- !u!1 &1708133605534432982
 GameObject:
   m_ObjectHideFlags: 0
