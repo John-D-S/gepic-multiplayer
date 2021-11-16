@@ -1365,6 +1365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mobile Controls HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 5885847515826362804, guid: 69c84ccdea5e6b34a9e3d20ddd92adea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5885847516118662298, guid: 69c84ccdea5e6b34a9e3d20ddd92adea, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

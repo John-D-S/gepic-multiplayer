@@ -40,11 +40,9 @@ namespace AltarChase.Player
 
         [SerializeField] private Light playerLight;
         private bool isLightOn = true;
-
-        [SerializeField] private GameObject speedBoost;
         private PlayerInput playerInput;
 
-        public bool isHoldingArtifact;
+		[Header("Holding and Dropping Locations")]
         [SerializeField] public Transform itemLocation;
         [SerializeField] public Transform itemDropLocation = null;
         [SerializeField] public Transform itemDropLocationBack;
@@ -52,12 +50,13 @@ namespace AltarChase.Player
         [SerializeField] public Transform itemDropLocationRight;
         [SerializeField] public Transform itemDropLocationLeft;
         [SerializeField] public Transform rayOrigin;
+
+		[Header("Artifact Variables")]
+        public bool isHoldingArtifact;
         [SerializeField] public Artifact artifact = null;
-
-        [SerializeField] private GameObject artifactTest;
-
         [SerializeField] public float timeHeldArtifact = 0;
-
+		
+        [Header("Character Variables")]
         [SerializeField] public int modelIndex = 0;
         [SerializeField] private List<GameObject> models = new List<GameObject>();
         [SerializeField] public string characterName = null;
@@ -67,7 +66,8 @@ namespace AltarChase.Player
         [SerializeField] public AudioSource artifactDropAudio;
         [SerializeField] public AudioSource potionAudio;
 
-        private List<TMP_Text> texts = new List<TMP_Text>();
+        //[SerializeField] private GameObject speedBoost;
+        //[SerializeField] private GameObject artifactTest;
 
 
         public override void OnStartClient()
@@ -200,12 +200,7 @@ namespace AltarChase.Player
 		        return;
 	        }
 	        
-	        // if(!Physics.Raycast(transform.position, -transform.forward,3f,6))
-		       //  return itemDropLocationForward;
-	        // if(Physics.Raycast(rayOrigin.position, -transform.forward,1.2f) && Physics.Raycast(rayOrigin.position, transform.forward,1.2f))
-		       //   return itemDropLocationLeft;
-	        // if(!Physics.Raycast(transform.position, -transform.right,3f,6))
-		       //  return itemDropLocationRight;
+	        
 	        itemDropLocation = itemDropLocationForward;
         }
         
@@ -287,16 +282,17 @@ namespace AltarChase.Player
         {
 	        CustomNetworkManager.RemovePlayer(this);
         }
-
-        [Command]
-        public void CmdDropSpeed() => DropSpeed();
-        
-        [Server]
-        public void DropSpeed()
-        { 
-	        GameObject speed = Instantiate(speedBoost);
-	        NetworkServer.Spawn(speed);
-        }
+		
+        // FOR TESTING PURPOSES
+        // [Command]
+        // public void CmdDropSpeed() => DropSpeed();
+        //
+        // [Server]
+        // public void DropSpeed()
+        // { 
+	       //  GameObject speed = Instantiate(speedBoost);
+	       //  NetworkServer.Spawn(speed);
+        // }
 			
 			
         // Update is called once per frame
