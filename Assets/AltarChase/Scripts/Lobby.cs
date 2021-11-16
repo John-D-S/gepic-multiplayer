@@ -28,22 +28,40 @@ namespace Networking.Scripts
 		[SerializeField] private List<Sprite> characterSprites = new List<Sprite>();
 		[SerializeField] private Image characterImage;
 		[SerializeField] private int index = 0;
+
+		private LevelGenerator theLevelGenerator;
+		public LevelGenerator TheLevelGenerator
+		{
+			get
+			{
+				LevelGenerator returnVal = null;
+				if(!theLevelGenerator)
+				{
+					returnVal = FindObjectOfType<LevelGenerator>();
+				}
+
+				return returnVal;
+			}
+		}
+
+		public void SetNumberOfTiles(float _numberOfTiles) => TheLevelGenerator.SetNumberOfTiles(Mathf.RoundToInt(_numberOfTiles));
+		public void SetNumberOfSpawnPoints(float _numberOfSpawnPoints) => TheLevelGenerator.SetNumberOfSpawnPoints(Mathf.RoundToInt(_numberOfSpawnPoints));
+		public void SetNumberOfPickups(float _numberOfPickups) => TheLevelGenerator.SetNumberOfPickups(Mathf.RoundToInt(_numberOfPickups));
+		public void SetNumberOfExits(float _numberOfExits) => TheLevelGenerator.SetNumberOfExits(Mathf.RoundToInt(_numberOfExits));
 		
 		private void Awake()
 		{
 			startButton.interactable = CustomNetworkManager.Instance.IsHost;
-			
 		}
 
 		public void OnClickStartMatch()
 		{
 			
 			PlayerInteract localPlayer = CustomNetworkManager.LocalPlayer;
-			
-			FindObjectOfType<LevelGenerator>().RegenerateLevelOnline();
 
-			
-			
+			TheLevelGenerator.RegenerateLevelOnline();
+
+
 			MatchManager.instance.StartMatch();
 			
 			gameObject.SetActive(false);

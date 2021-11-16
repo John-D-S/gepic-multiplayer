@@ -14,6 +14,7 @@ public class GameMatchSettings : MonoBehaviour
   
     private void Start()
     {
+        _sliderText.text = slider.value.ToString("0");
         slider.onValueChanged.AddListener((v) =>
         {
             _sliderText.text = v.ToString("0");
