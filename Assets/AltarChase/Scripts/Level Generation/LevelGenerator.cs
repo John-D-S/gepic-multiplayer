@@ -24,6 +24,11 @@ namespace AltarChase.LevelGen
         [SerializeField] private GameObject exit;
         [SerializeField] private int numberOfExits = 2;
 
+        public void SetNumberOfTiles(int _numberOfTiles) => numerOfTiles = _numberOfTiles;
+        public void SetNumberOfSpawnPoints(int _numberOfSpawnPoints) => numberOfPlayerSpawnPoints = _numberOfSpawnPoints;
+        public void SetNumberOfPickups(int _numberOfPickups) => numberOfPickups = _numberOfPickups;
+        public void SetNumberOfExits(int _numberOfExits) => numberOfExits = _numberOfExits;
+        
         //use network server.spawn for instantiation.
         //all modules should have a network identity and all module prefabs should be in registered spawnable prefabs in the network manager. 
         private Dictionary<Vector3Int, TempLevelTileData> levelTilesByGridPos = new Dictionary<Vector3Int, TempLevelTileData>();
