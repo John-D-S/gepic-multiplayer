@@ -1,3 +1,6 @@
+using AltarChase.Networking;
+using AltarChase.Player;
+
 using Mirror;
 
 using System;
@@ -37,6 +40,11 @@ namespace NetworkGame.Networking
             if(_new)
             {
                 SceneManager.UnloadSceneAsync("Lobby");
+
+                PlayerInteract player = CustomNetworkManager.LocalPlayer;
+                Transform startPos = CustomNetworkManager.Instance.GetStartPosition();
+                player.transform.position = new Vector3(startPos.position.x, startPos.position.y + 1, startPos.position.z);
+                player.transform.rotation = startPos.rotation;
             }
         }
         

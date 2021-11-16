@@ -67,6 +67,7 @@ namespace AltarChase.Player
         [SerializeField] public AudioSource artifactDropAudio;
         [SerializeField] public AudioSource potionAudio;
 
+        private List<TMP_Text> texts = new List<TMP_Text>();
 
 
         public override void OnStartClient()
@@ -79,7 +80,11 @@ namespace AltarChase.Player
 	        playerInput = GetComponent<PlayerInput>();
 	        playerCamera = FindObjectOfType<Camera>();
 	        netID = gameObject.GetComponent<NetworkIdentity>().netId;
-	        trapCountHud = FindObjectOfType<TMP_Text>();
+
+	        trapCountHud = GameObject.FindWithTag("TrapCountHUD").GetComponent<TMP_Text>();
+
+
+
 
         }
 

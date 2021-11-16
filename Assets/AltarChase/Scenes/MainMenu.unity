@@ -1384,6 +1384,14 @@ PrefabInstance:
       value: Assets/AltarChase/Scenes/MainMenu.unity
       objectReference: {fileID: 0}
     - target: {fileID: 1722840403432052350, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
+      propertyPath: autoCreatePlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722840403432052350, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
+      propertyPath: playerSpawnMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722840403432052350, guid: a68d33f57f910ce40a03281ee718396c, type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 25
       objectReference: {fileID: 0}
