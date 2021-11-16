@@ -22,6 +22,7 @@ namespace AltarChase.LevelGen
         [SerializeField] private int numberOfPickups;
         [SerializeField] private GameObject idol;
         [SerializeField] private GameObject exit;
+        [SerializeField] private int numberOfExits = 2;
 
         //use network server.spawn for instantiation.
         //all modules should have a network identity and all module prefabs should be in registered spawnable prefabs in the network manager. 
@@ -168,6 +169,9 @@ namespace AltarChase.LevelGen
             if(playerSpawnPoint)
                 for(int i = 0; i < numberOfPlayerSpawnPoints; i++)
                     allObjetsToSpawn.Add(playerSpawnPoint);
+            if(exit)
+                for(int i = 0; i < numberOfExits; i++)
+                    allObjetsToSpawn.Add(exit);
             if(pickups != null)
             {
                 for(int i = 0; i < numberOfPickups; i++)
@@ -179,8 +183,6 @@ namespace AltarChase.LevelGen
             }
             if(idol)
                 allObjetsToSpawn.Add(idol);
-            if(exit)
-                allObjetsToSpawn.Add(exit);
             
             List<Vector3Int> shuffledSpawnPositions = closedPositions.OrderBy(x => Guid.NewGuid()).ToList();
 
