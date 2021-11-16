@@ -10,32 +10,32 @@ namespace AltarChase.Scripts.Xavier_Scripts
 {
     public class OptionMenu : MonoBehaviour
     {
-        [Header("Audio Stuff")]
-        public AudioMixer audioMixer;
-    
-        [Header("Resolution Set")]
-        public TMP_Dropdown resolutionDropdown;
+        [Header("Audio Stuff")] public AudioMixer audioMixer;
+
+        [Header("Resolution Set")] public TMP_Dropdown resolutionDropdown;
         Resolution[] resolutions;
         public Toggle fullscreenToggle;
-    
-        [Header("Quality Set")]
-        public TMP_Dropdown qualityDropdown;
-    
-        [Header("Texture Set")]
-        public TMP_Dropdown textureDropdown;
 
-        [Header("Anti-Aliasing Set")] 
-        public TMP_Dropdown aaDropdown;
+        [Header("Quality Set")] public TMP_Dropdown qualityDropdown;
 
-        [Header("Volume Set")]
-        public Slider masterVolume;
+        [Header("Texture Set")] public TMP_Dropdown textureDropdown;
+
+        [Header("Anti-Aliasing Set")] public TMP_Dropdown aaDropdown;
+
+        [Header("Volume Set")] public Slider masterVolume;
         public Slider sfxVolumeSlider;
         float currentVolume;
 
+        #region Properties
+
         [SerializeField] private GameObject pausemenuUI;
+        [SerializeField] private GameObject pausemenuMOBILEUI;
         public static bool isPaused = false;
         public static bool loadData = false;
-        
+
+        #endregion
+
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -51,7 +51,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
                 }
             }
         }
-        
+
         public void Resume()
         {
             pausemenuUI.SetActive(false);
@@ -69,6 +69,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
         public void ResolutionAwake()
         {
             #region Resolution Start
+
             resolutionDropdown.ClearOptions();
             List<string> resOptions = new List<string>();
             resolutions = Screen.resolutions;
@@ -82,7 +83,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
                 if (resolutions[i].width == Screen.currentResolution.width
                     && resolutions[i].height == Screen.currentResolution.height)
                 {
-                    currentResolutionIndex = i; 
+                    currentResolutionIndex = i;
                 }
             }
 
@@ -99,17 +100,26 @@ namespace AltarChase.Scripts.Xavier_Scripts
                 resolutionDropdown.value = currentResolutionIndex;
                 resolutionDropdown.RefreshShownValue();
             }
+
             #endregion
         }
-        
+
 
         private void Start()
         {
 #if UNITY_STANDALONE
-            ResolutionAwake();
+        PCLoadIn();
 
-            LoadSettings();
+#elif UNITY_ANDROID
+        
 #endif
+        }
+
+        private void PCLoadIn()
+        {
+            ResolutionAwake();
+            pausemenuMOBILEUI.SetActive(false);
+            LoadSettings();
         }
 
         #region Volume Stuff
@@ -118,12 +128,12 @@ namespace AltarChase.Scripts.Xavier_Scripts
         {
             PlayerPrefs.SetFloat("MasterVolume", volume);
             volume = VolumeRemapping(volume);
-            audioMixer.SetFloat("masterVolume",volume);
+            audioMixer.SetFloat("masterVolume", volume);
         }
 
         public void SFXVolume(float volume)
         {
-            PlayerPrefs.SetFloat("sfxVolume",volume);
+            PlayerPrefs.SetFloat("sfxVolume", volume);
             volume = VolumeRemapping(volume);
             audioMixer.SetFloat("sfxVolume", volume);
         }
@@ -134,11 +144,11 @@ namespace AltarChase.Scripts.Xavier_Scripts
         }
 
         #endregion
-   
+
 
         public void SetFullScreen(bool isFullscreen)
         {
-            PlayerPrefs.SetInt("Fullscreen",(isFullscreen ? 1 : 0));
+            PlayerPrefs.SetInt("Fullscreen", (isFullscreen ? 1 : 0));
             Screen.fullScreen = isFullscreen;
         }
 
@@ -155,7 +165,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
             qualityDropdown.value = 6;
             PlayerPrefs.SetInt("TextureQuality", textureIndex);
         }
-        
+
         /// <summary>
         /// Method that will find all the AA settings and place it in the Dropdown!
         /// </summary>
@@ -165,7 +175,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
             QualitySettings.antiAliasing = aaIndex;
             qualityDropdown.value = 6;
         }
-        
+
         public void SetQuality(int qualityIndex)
         {
             QualitySettings.SetQualityLevel(qualityIndex);
@@ -180,9 +190,8 @@ namespace AltarChase.Scripts.Xavier_Scripts
                 resolutionDropdown.value = resIndex;
                 resolutionDropdown.RefreshShownValue();
                 SetResolution(resIndex);
-
             }
-        
+
             if (PlayerPrefs.HasKey("Quality"))
             {
                 int quality = PlayerPrefs.GetInt("Quality");
@@ -226,7 +235,6 @@ namespace AltarChase.Scripts.Xavier_Scripts
                 }
 
                 SetFullScreen(_fullscreen);
-
             }
         }
     }
