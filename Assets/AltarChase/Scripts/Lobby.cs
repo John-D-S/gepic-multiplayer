@@ -1,5 +1,6 @@
 
 
+using AltarChase.LevelGen;
 using AltarChase.Networking;
 using AltarChase.Player;
 
@@ -40,6 +41,7 @@ namespace Networking.Scripts
 			PlayerInteract localPlayer = CustomNetworkManager.LocalPlayer;
 			// localPlayer.modelIndex = index;
 			// localPlayer.CmdChangeModel(localPlayer.modelIndex);
+			FindObjectOfType<LevelGenerator>().RegenerateLevelOnline();
 			
 			MatchManager.instance.StartMatch();
 			
