@@ -10,7 +10,7 @@ using NetworkGame.Networking;
 
 using System;
 using System.Collections.Generic;
-
+using AltarChase.Scripts.Xavier_Scripts;
 using TMPro;
 
 using UnityEngine;
@@ -46,6 +46,9 @@ namespace Networking.Scripts
 			MatchManager.instance.StartMatch();
 			
 			gameObject.SetActive(false);
+
+			CountdownTimer count = FindObjectOfType<CountdownTimer>();
+			count.timerRunning = true;
 		}
 
 		/// <summary>
