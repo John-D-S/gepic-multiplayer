@@ -101,7 +101,7 @@ namespace AltarChase
         {
             PlayerMotor motor = _target.identity.gameObject.GetComponent<PlayerMotor>();
             PlayerInteract interact = _target.identity.GetComponent<PlayerInteract>();
-
+            interact.trapAudio.Play();
             if(interact.artifact != null)
             {
                 interact.CmdGetDropLocation();

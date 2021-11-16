@@ -37,6 +37,7 @@ namespace AltarChase
 		[TargetRpc]
 		public void TargetSpeedBoost(NetworkConnection _target)
 		{
+			_target.identity.gameObject.GetComponent<PlayerInteract>().potionAudio.Play();
 			PlayerMotor motor = _target.identity.gameObject.GetComponent<PlayerMotor>();
 			motor.CallSpeedBoostCR();
 			//NetworkServer.Destroy(gameObject);

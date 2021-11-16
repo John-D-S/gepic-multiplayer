@@ -527,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 2445625172369103156, guid: 80b25ea3a0c27e34a85061434f98f63f, type: 3}
     - target: {fileID: 4029291607886010821, guid: 17a423697ac4e154681b137025c1683c, type: 3}
       propertyPath: numberOfPickups
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4029291607886010821, guid: 17a423697ac4e154681b137025c1683c, type: 3}
       propertyPath: playerSpawnPoint

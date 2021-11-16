@@ -62,6 +62,11 @@ namespace AltarChase.Player
         [SerializeField] private List<GameObject> models = new List<GameObject>();
         [SerializeField] public string characterName = null;
 
+        [Header("Audio SFX")] 
+        [SerializeField] public AudioSource trapAudio;
+        [SerializeField] public AudioSource artifactDropAudio;
+        [SerializeField] public AudioSource potionAudio;
+
 
 
         public override void OnStartClient()
@@ -156,7 +161,7 @@ namespace AltarChase.Player
         [Command]
         public void CmdDropArtifact(GameObject _artifact)
         {
-	        
+	        artifactDropAudio.Play();
 	        artifact = _artifact.GetComponent<Artifact>();
 	        artifact.RpcDropItem(this.gameObject);
 	        Debug.Log(itemDropLocation);
