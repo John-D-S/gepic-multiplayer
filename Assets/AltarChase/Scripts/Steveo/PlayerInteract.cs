@@ -308,7 +308,11 @@ namespace AltarChase.Player
 		        
 		        if(Input.GetKeyDown(KeyCode.E) || (playerInput.actions["Light"].triggered))
 		        {
-			        CmdTurnOffLight();
+			        if(MatchManager.instance.matchStarted)
+			        {
+						CmdTurnOffLight();
+				        
+			        }
 		        }
 		        
 		        if(Input.GetKeyDown(KeyCode.Y))

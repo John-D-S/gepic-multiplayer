@@ -44,7 +44,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
             }
             else
             {
-                Debug.LogError("Time has ran out!");
+                Debug.Log("Time has ran out!");
                 if (timerRunning)
                 {
                     _popup.RpcPopupText("Time has ran out!");
