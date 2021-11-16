@@ -238,7 +238,7 @@ namespace AltarChase.LevelGen
 
         public override void OnStartServer()
         {
-            RegenerateLevelOnline();
+            //RegenerateLevelOnline();
         }
     }    
 }

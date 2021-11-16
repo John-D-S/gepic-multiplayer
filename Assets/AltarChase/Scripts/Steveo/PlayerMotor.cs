@@ -111,14 +111,9 @@ namespace AltarChase.Player
             // Sets the character facing direction when moving
             if(movementVelocity != 0)
             {
-                transform.rotation = Quaternion.LookRotation(movementDirection);
+                transform.rotation = Quaternion.LookRotation(Vector3.Lerp(transform.forward, lastLookDirection,0.25f));
                 // Saves the direction to use when stopped.
                 lastLookDirection = movementDirection;
-            }
-            // Sets the character facing direction to the last direction it was moving in.
-            if(movementVelocity == 0)
-            {
-                transform.rotation = Quaternion.LookRotation(lastLookDirection);
             }
         }
 
