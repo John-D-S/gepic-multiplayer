@@ -23,7 +23,9 @@ namespace NetworkGame.Networking
 
         [SyncVar] public bool doubleSpeed = false;
         [SyncVar] public bool isScoreMode = false;
-        
+
+        private float highestScore = 0;
+        public PlayerInteract playerWithHighestScore = null;
         public void StartMatch()
         {
             if(hasAuthority)
@@ -50,7 +52,26 @@ namespace NetworkGame.Networking
                 player.transform.rotation = startPos.rotation;
             }
         }
-        
+
+        [Server]
+        public void FindHighestScore()
+        {
+            foreach(PlayerInteract player in CustomNetworkManager.Instance.players.Values)
+            {
+                Debug.Log("in for each" + player.characterName);
+                if(player.timeHeldArtifactSync > highestScore)
+                {
+                    
+                    highestScore = player.timeHeldArtifactSync;
+                    playerWithHighestScore = player;
+                }
+            }
+        }
+
+        public void CallLoadMainMenu(int _seconds) => Invoke(nameof(RpcLoadMainMenu), _seconds);
+
+        [ClientRpc]
+        public void RpcLoadMainMenu() => SceneManager.LoadScene("MainMenu");
         
 
         protected void Awake()

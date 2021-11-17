@@ -23,15 +23,6 @@ namespace AltarChase.Player
 	    private Camera playerCamera;
 	    [SerializeField] private Vector3 camOffset;
 	    
-        /* 
-         * trap number & update HUD 
-         * pick up artifact
-         * is holding artifact
-         * drop artifact
-         * WIN
-         * LOOSE ??
-         */
-
         [SerializeField] private GameObject trapPrefab;
 
         [SerializeField] public int trapCount = 0;
@@ -55,6 +46,7 @@ namespace AltarChase.Player
         public bool isHoldingArtifact;
         [SerializeField] public Artifact artifact = null;
         [SerializeField] public float timeHeldArtifact = 0;
+        [SerializeField] public float timeHeldArtifactSync = 0;
 		
         [Header("Character Variables")]
         [SerializeField] public int modelIndex = 0;
@@ -66,8 +58,7 @@ namespace AltarChase.Player
         [SerializeField] public AudioSource artifactDropAudio;
         [SerializeField] public AudioSource potionAudio;
 
-        //[SerializeField] private GameObject speedBoost;
-        //[SerializeField] private GameObject artifactTest;
+        
 
 
         public override void OnStartClient()
@@ -82,12 +73,19 @@ namespace AltarChase.Player
 	        netID = gameObject.GetComponent<NetworkIdentity>().netId;
 
 	        trapCountHud = GameObject.FindWithTag("TrapCountHUD").GetComponent<TMP_Text>();
-
-
-
-
         }
 
+        private void ArtifactHeldTime(float _old, float _new)
+        {
+	        timeHeldArtifactSync = _new;
+        }
+
+        [Command]
+        public void CmdArtifactHoldTime(float _time) => RpcArtifactHoldTime(_time);
+
+        [ClientRpc]
+        public void RpcArtifactHoldTime(float _time) => timeHeldArtifactSync = _time;
+        
         public override void OnStartLocalPlayer()
         {
 	        SceneManager.LoadSceneAsync("Lobby", LoadSceneMode.Additive);
@@ -178,7 +176,9 @@ namespace AltarChase.Player
         [ClientRpc]
         public void RpcGetDropLocation() => GetDropLocation();
 
-        
+        /// <summary>
+        /// Gets the correct drop location when dropping the artifact.
+        /// </summary>
         public void GetDropLocation()
         {
 	        Debug.DrawRay(rayOrigin.position, transform.forward * 1.23f, Color.cyan, 6);
@@ -251,6 +251,10 @@ namespace AltarChase.Player
 	        }
         }
 
+        /// <summary>
+        /// Rpc for setting traps
+        /// </summary>
+        /// <param name="_trap">the trap game object</param>
         [ClientRpc]
         public void RpcSetTrap(GameObject _trap)
         {
@@ -343,6 +347,9 @@ namespace AltarChase.Player
 		        if(isHoldingArtifact)
 			        timeHeldArtifact += Time.deltaTime;
 
+		       
+				CmdArtifactHoldTime(timeHeldArtifact); 
+		       
 		        if(trapCountHud != null)
 			        trapCountHud.text = trapCount.ToString();
 	        }

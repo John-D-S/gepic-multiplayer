@@ -71,7 +71,7 @@ namespace AltarChase.Networking
 
 	    public CustomNetworkDiscovery discovery;
 
-	    private readonly Dictionary<uint, PlayerInteract> players = new Dictionary<uint, PlayerInteract>();
+	    public readonly Dictionary<uint, PlayerInteract> players = new Dictionary<uint, PlayerInteract>();
 	    
 	    /// <summary>
 	    /// This is invoked when a host is started.

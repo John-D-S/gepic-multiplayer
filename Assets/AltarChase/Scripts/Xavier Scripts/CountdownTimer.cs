@@ -8,7 +8,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
     public class CountdownTimer : NetworkBehaviour
     {
         [Header("Timer Set")]
-        [SerializeField,SyncVar] public float timeRemaining = 10;
+        [SerializeField,SyncVar] public float timeRemaining = 120;
 
         private Popup _popup;
         [SyncVar] private float minutes;
@@ -58,9 +58,19 @@ namespace AltarChase.Scripts.Xavier_Scripts
                 Debug.Log("Time has ran out!");
                 if (timerRunning)
                 {
-                    _popup.RpcPopupText("Time has ran out!");
+                    MatchManager.instance.FindHighestScore();
+                    if(MatchManager.instance.playerWithHighestScore != null)
+                    {
+                        _popup.RpcPopupText($"{MatchManager.instance.playerWithHighestScore.characterName} WINS! \n They held onto the artifact the longest");
+                    }
+                    else
+                    {
+                        _popup.RpcPopupText($"Nobody WINS! \n The artifact was never found");
+
+                    }
                     timeRemaining = 0;
                     timerRunning = false;
+                    MatchManager.instance.CallLoadMainMenu(5);
                 }
                 timer.text = "0:00";
             }
