@@ -6,6 +6,7 @@ using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AltarChase.Scripts.Xavier_Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,12 +15,14 @@ namespace NetworkGame.Networking
     public class MatchManager : NetworkBehaviour
     {
         public static MatchManager instance = null;
+        private CountdownTimer countdownTimer;
     
         [SyncVar(hook  = nameof(OnRecievedMatchStarted))] public bool matchStarted = false;
 
         // Any match settings you want here
 
         [SyncVar] public bool doubleSpeed = false;
+        [SyncVar] public bool isScoreMode = false;
         
         public void StartMatch()
         {
@@ -61,8 +64,8 @@ namespace NetworkGame.Networking
                 Destroy(gameObject);
                 return;
             }
-        
             // Anything else you want to do in awake
+            
         }
     }
 }

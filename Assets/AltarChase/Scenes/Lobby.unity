@@ -3764,6 +3764,42 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+      value: Escape Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: Score Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 818228116}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DropdownCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Networking.Scripts.Lobby, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712220038721073, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 218712220069206473, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -30,6 +30,7 @@ namespace Networking.Scripts
 		[SerializeField] private int index = 0;
 
 		private CountdownTimer countdownTimer;
+		private MatchManager matchManager;
 		private LevelGenerator theLevelGenerator;
 		public LevelGenerator TheLevelGenerator
 		{
@@ -55,6 +56,7 @@ namespace Networking.Scripts
 		{
 			startButton.interactable = CustomNetworkManager.Instance.IsHost;
 			countdownTimer = FindObjectOfType<CountdownTimer>();
+			matchManager = FindObjectOfType<MatchManager>();
 		}
 
 		public void OnClickStartMatch()
@@ -70,7 +72,7 @@ namespace Networking.Scripts
 			gameObject.SetActive(false);
 
 			CountdownTimer count = FindObjectOfType<CountdownTimer>();
-			count.timerRunning = true;
+			//count.timerRunning = true;
 		}
 
 		/// <summary>
@@ -92,6 +94,18 @@ namespace Networking.Scripts
 		{
 			PlayerInteract localPlayer = CustomNetworkManager.LocalPlayer;
 			localPlayer.CmdCharacterName(characterNameInput.text);
+		}
+		
+		public void DropdownCheck(int value)
+		{
+			if (value == 0)
+			{
+				matchManager.isScoreMode = false;
+			}
+			else
+			{
+				matchManager.isScoreMode = true;
+			}
 		}
 	}
 }

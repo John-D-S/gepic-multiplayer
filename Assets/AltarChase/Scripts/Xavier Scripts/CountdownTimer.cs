@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using NetworkGame.Networking;
 using TMPro;
 using UnityEngine;
 
@@ -28,6 +29,16 @@ namespace AltarChase.Scripts.Xavier_Scripts
             if(timerRunning)
             {
                 TimeOnEveryone();
+            }
+            
+            if(MatchManager.instance.isScoreMode && MatchManager.instance.matchStarted)
+            {
+                timerRunning = true;
+                timer.gameObject.SetActive(true);
+            }
+            else if(MatchManager.instance.matchStarted && !MatchManager.instance.isScoreMode)
+            {
+                timer.gameObject.SetActive(false);
             }
         }
    
