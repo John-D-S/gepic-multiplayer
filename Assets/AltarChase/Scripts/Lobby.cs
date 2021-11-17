@@ -29,6 +29,7 @@ namespace Networking.Scripts
 		[SerializeField] private Image characterImage;
 		[SerializeField] private int index = 0;
 
+		private CountdownTimer countdownTimer;
 		private LevelGenerator theLevelGenerator;
 		public LevelGenerator TheLevelGenerator
 		{
@@ -48,10 +49,12 @@ namespace Networking.Scripts
 		public void SetNumberOfSpawnPoints(float _numberOfSpawnPoints) => TheLevelGenerator.SetNumberOfSpawnPoints(Mathf.RoundToInt(_numberOfSpawnPoints));
 		public void SetNumberOfPickups(float _numberOfPickups) => TheLevelGenerator.SetNumberOfPickups(Mathf.RoundToInt(_numberOfPickups));
 		public void SetNumberOfExits(float _numberOfExits) => TheLevelGenerator.SetNumberOfExits(Mathf.RoundToInt(_numberOfExits));
-		
+		public void SetTimerValue(float _finalTime) => countdownTimer.timeRemaining = _finalTime;
+
 		private void Awake()
 		{
 			startButton.interactable = CustomNetworkManager.Instance.IsHost;
+			countdownTimer = FindObjectOfType<CountdownTimer>();
 		}
 
 		public void OnClickStartMatch()

@@ -7,7 +7,7 @@ namespace AltarChase.Scripts.Xavier_Scripts
     public class CountdownTimer : NetworkBehaviour
     {
         [Header("Timer Set")]
-        [SerializeField,SyncVar] private float timeRemaining = 10;
+        [SerializeField,SyncVar] public float timeRemaining = 10;
 
         private Popup _popup;
         [SyncVar] private float minutes;
