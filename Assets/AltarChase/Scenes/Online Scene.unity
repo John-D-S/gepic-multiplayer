@@ -284,6 +284,8 @@ MonoBehaviour:
   syncInterval: 0.1
   matchStarted: 0
   doubleSpeed: 0
+  isScoreMode: 0
+  playerWithHighestScore: {fileID: 0}
 --- !u!114 &406334895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,7 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  timeRemaining: 10
+  timeRemaining: 180
   timer: {fileID: 8861534740615419915}
   timerRunning: 0
 --- !u!114 &967559850

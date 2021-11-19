@@ -1161,6 +1161,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 79fe659787da3f04ea25c182ace7769d, type: 3}
   characterImage: {fileID: 363537050}
   index: 0
+  noOfExitsSlider: {fileID: 218712219579082420}
 --- !u!1 &939299017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3288,6 +3289,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 218712218340151777, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.99414
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712218340151777, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.99414
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712218340151777, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.99414
+      objectReference: {fileID: 0}
     - target: {fileID: 218712218464609050, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3387,6 +3400,18 @@ PrefabInstance:
     - target: {fileID: 218712218657618683, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712218665727030, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3906
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712218665727030, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3906
+      objectReference: {fileID: 0}
+    - target: {fileID: 218712218665727030, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3906
       objectReference: {fileID: 0}
     - target: {fileID: 218712218772734832, guid: ab2e1eb797c1a57418b16b28d4ac3b95, type: 3}
       propertyPath: m_Value

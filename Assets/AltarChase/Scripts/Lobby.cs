@@ -29,6 +29,9 @@ namespace Networking.Scripts
 		[SerializeField] private Image characterImage;
 		[SerializeField] private int index = 0;
 
+		[SerializeField] private Slider noOfExitsSlider;
+		private bool setExits = false;
+
 		private CountdownTimer countdownTimer;
 		private MatchManager matchManager;
 		private LevelGenerator theLevelGenerator;
@@ -57,6 +60,29 @@ namespace Networking.Scripts
 			startButton.interactable = CustomNetworkManager.Instance.IsHost;
 			countdownTimer = FindObjectOfType<CountdownTimer>();
 			matchManager = FindObjectOfType<MatchManager>();
+		}
+
+		private void Update()
+		{
+			// if playing in score mode the no of exits will be set to zero.
+			if(matchManager.isScoreMode)
+			{
+				noOfExitsSlider.interactable = false;
+				if(!setExits)
+				{
+					SetNumberOfExits(0);
+					setExits = true;
+				}
+			}
+			else
+			{
+				noOfExitsSlider.interactable = true;
+				if(!setExits)
+				{
+					SetNumberOfExits(1);
+					setExits = true;
+				}
+			}
 		}
 
 		public void OnClickStartMatch()
@@ -101,10 +127,12 @@ namespace Networking.Scripts
 			if (value == 0)
 			{
 				matchManager.isScoreMode = false;
+				setExits = false;
 			}
 			else
 			{
 				matchManager.isScoreMode = true;
+				setExits = false;
 			}
 		}
 	}
