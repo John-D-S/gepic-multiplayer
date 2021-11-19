@@ -64,7 +64,7 @@ namespace Networking.Scripts
 
 		private void Update()
 		{
-			// if playing in score mode the no of exits will be set to zero.
+			// if playing in score mode the no. of exits will be set to zero and slider non-interacable.
 			if(matchManager.isScoreMode)
 			{
 				noOfExitsSlider.interactable = false;
@@ -122,6 +122,10 @@ namespace Networking.Scripts
 			localPlayer.CmdCharacterName(characterNameInput.text);
 		}
 		
+		/// <summary>
+		/// Function for the Game Mode dropdown selector.
+		/// </summary>
+		/// <param name="value">value of the dropdown choice</param>
 		public void DropdownCheck(int value)
 		{
 			if (value == 0)

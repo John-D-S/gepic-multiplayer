@@ -53,6 +53,9 @@ namespace NetworkGame.Networking
             }
         }
 
+        /// <summary>
+        /// Finds the player with the highest score.
+        /// </summary>
         [Server]
         public void FindHighestScore()
         {
@@ -68,6 +71,10 @@ namespace NetworkGame.Networking
             }
         }
 
+        /// <summary>
+        /// Stops the Host and Server and Loads the Main Menu.
+        /// </summary>
+        /// <param name="_seconds">The amount of time in seconds until the main menu scene loads.</param>
         public void CallLoadMainMenu(int _seconds) => Invoke(nameof(RpcLoadMainMenu), _seconds);
 
         [ClientRpc]

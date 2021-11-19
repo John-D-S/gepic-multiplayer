@@ -42,11 +42,15 @@ namespace AltarChase
             
 		}
 
+		/// <summary>
+		/// Hides the player once they exit and loads main menu and stops host and server.
+		/// </summary>
+		/// <param name="_player"></param>
 		[ClientRpc]
 		public void RpcHidePayer(GameObject _player)
 		{
 			_player.SetActive(false);
-			MatchManager.instance.CallLoadMainMenu(5);
+			MatchManager.instance.CallLoadMainMenu(3);
 		}
 
 		

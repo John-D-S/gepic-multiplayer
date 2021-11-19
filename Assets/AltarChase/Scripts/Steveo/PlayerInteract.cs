@@ -75,14 +75,14 @@ namespace AltarChase.Player
 	        trapCountHud = GameObject.FindWithTag("TrapCountHUD").GetComponent<TMP_Text>();
         }
 
-        private void ArtifactHeldTime(float _old, float _new)
-        {
-	        timeHeldArtifactSync = _new;
-        }
-
+        
         [Command]
         public void CmdArtifactHoldTime(float _time) => RpcArtifactHoldTime(_time);
 
+        /// <summary>
+        /// Used for updating the players artifact hold time so it can be checked at the end of the match.
+        /// </summary>
+        /// <param name="_time"></param>
         [ClientRpc]
         public void RpcArtifactHoldTime(float _time) => timeHeldArtifactSync = _time;
         
@@ -93,6 +93,9 @@ namespace AltarChase.Player
 	        CmdAssignAuthority();
         }
 
+        /// <summary>
+        /// Enables the player motor
+        /// </summary>
         public void EnableMotor()
         {
 	        PlayerMotor motor = gameObject.GetComponent<PlayerMotor>();
@@ -108,12 +111,20 @@ namespace AltarChase.Player
 	        CharacterName(_name);
         }
 
+        /// <summary>
+        /// Sets the character name and gameobject name
+        /// </summary>
+        /// <param name="_name"></param>
         public void CharacterName(string _name)
         {
 	        characterName = _name;
 	        gameObject.name = _name;
         }
 
+        /// <summary>
+        /// Sets the character model
+        /// </summary>
+        /// <param name="_index">the index of the model</param>
         public void ChangeModel(int _index)
         {
 	        foreach(GameObject model in models)
@@ -142,12 +153,17 @@ namespace AltarChase.Player
 	        MatchManager.instance.netIdentity.AssignClientAuthority(connectionToClient);
         }
 
+        /// <summary>
+        /// Sets values for the artifact
+        /// </summary>
+        /// <param name="_artifact">the artifact game object</param>
 		public void GetArtifact(GameObject _artifact)
         {
 	        isHoldingArtifact = true;
 	        artifact = _artifact.GetComponent<Artifact>();
         }
 
+        // NOT BEING USED. WAS A FIRST TRY FOR DROPPING ARTIFACT. NOW USING SLIGHTLY DIFFERENT METHOD.
         [ClientRpc]
         public void RpcDropArtifact()
         {
@@ -161,6 +177,10 @@ namespace AltarChase.Player
 	        }
         }
 
+        /// <summary>
+        /// The Drop artifact command
+        /// </summary>
+        /// <param name="_artifact">the game object of the artifact.</param>
         [Command]
         public void CmdDropArtifact(GameObject _artifact)
         {

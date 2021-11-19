@@ -32,6 +32,10 @@ namespace AltarChase
             
 		}
 
+		/// <summary>
+		/// Sets the artifact carry location and parent transform
+		/// </summary>
+		/// <param name="_interact"> The player interact that is getting the artifact</param>
 		[ClientRpc]
 		public void RpcPickUpItem(PlayerInteract _interact)
 		{
@@ -39,6 +43,10 @@ namespace AltarChase
 			transform.position = _interact.itemLocation.position;
 		}
 
+		/// <summary>
+		/// Used for dropping the item the player is carrying.
+		/// </summary>
+		/// <param name="_player">The player gameobject</param>
 		[ClientRpc]
 		public void RpcDropItem(GameObject _player)
 		{
@@ -53,7 +61,7 @@ namespace AltarChase
 		}
 
 		/// <summary>
-		/// This calls the ....
+		/// This calls the get artifact of the player who touches the artifact.
 		/// </summary>
 		/// <param name="_target">The NetworkConnection of the player</param>
 		[TargetRpc]
