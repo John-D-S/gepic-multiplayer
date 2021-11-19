@@ -28,7 +28,9 @@ namespace Networking.Scripts
 		[SerializeField] private List<Sprite> characterSprites = new List<Sprite>();
 		[SerializeField] private Image characterImage;
 		[SerializeField] private int index = 0;
-
+		[SerializeField] private Slider noOfTilesSlider;
+		
+		
 		[SerializeField] private Slider noOfExitsSlider;
 		private bool setExits = false;
 
@@ -50,9 +52,30 @@ namespace Networking.Scripts
 		}
 
 		public void SetNumberOfTiles(float _numberOfTiles) => TheLevelGenerator.SetNumberOfTiles(Mathf.RoundToInt(_numberOfTiles));
-		public void SetNumberOfSpawnPoints(float _numberOfSpawnPoints) => TheLevelGenerator.SetNumberOfSpawnPoints(Mathf.RoundToInt(_numberOfSpawnPoints));
-		public void SetNumberOfPickups(float _numberOfPickups) => TheLevelGenerator.SetNumberOfPickups(Mathf.RoundToInt(_numberOfPickups));
-		public void SetNumberOfExits(float _numberOfExits) => TheLevelGenerator.SetNumberOfExits(Mathf.RoundToInt(_numberOfExits));
+
+		private int numberOfSpawnpoints = 4;
+		public void SetNumberOfSpawnPoints(float _numberOfSpawnPoints)
+		{
+			numberOfSpawnpoints = Mathf.RoundToInt(_numberOfSpawnPoints);
+			TheLevelGenerator.SetNumberOfSpawnPoints(numberOfSpawnpoints);
+			noOfTilesSlider.minValue = numberOfSpawnpoints + numberOfPickups + numberOfExits + 1;
+		}
+
+		private int numberOfPickups = 25;
+		public void SetNumberOfPickups(float _numberOfPickups)
+		{
+			numberOfPickups = Mathf.RoundToInt(_numberOfPickups);
+			TheLevelGenerator.SetNumberOfPickups(numberOfPickups);
+			noOfTilesSlider.minValue = numberOfSpawnpoints + numberOfPickups + numberOfExits + 1;
+		}
+		
+		private int numberOfExits = 1;
+		public void SetNumberOfExits(float _numberOfExits)
+		{
+			numberOfExits = Mathf.RoundToInt(_numberOfExits);
+			TheLevelGenerator.SetNumberOfExits(numberOfExits);
+			noOfTilesSlider.minValue = numberOfSpawnpoints + numberOfPickups + numberOfExits + 1;
+		} 
 		public void SetTimerValue(float _finalTime) => countdownTimer.timeRemaining = _finalTime;
 
 		private void Awake()
@@ -60,6 +83,7 @@ namespace Networking.Scripts
 			startButton.interactable = CustomNetworkManager.Instance.IsHost;
 			countdownTimer = FindObjectOfType<CountdownTimer>();
 			matchManager = FindObjectOfType<MatchManager>();
+			noOfTilesSlider.minValue = numberOfSpawnpoints + numberOfPickups + numberOfExits + 1;
 		}
 
 		private void Update()
