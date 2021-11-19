@@ -12,9 +12,9 @@ public class CameraSpin : MonoBehaviour
 
     private void Start()
     {
-        xSpeed = Random.Range(5, 10);
+        //xSpeed = Random.Range(5, 10);
         ySpeed = Random.Range(5, 10);
-        zSpeed = Random.Range(5, 10);
+        //zSpeed = Random.Range(5, 10);
     }
 
     void Update()

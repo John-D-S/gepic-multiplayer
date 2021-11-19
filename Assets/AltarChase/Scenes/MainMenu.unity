@@ -1454,7 +1454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xSpeed: 0
-  ySpeed: 0
+  ySpeed: 7
   zSpeed: 0
 --- !u!4 &649678868
 Transform:
