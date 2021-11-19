@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+using NetworkGame.Networking;
+
 using UnityEngine.SceneManagement;
 
 namespace AltarChase
@@ -44,10 +46,9 @@ namespace AltarChase
 		public void RpcHidePayer(GameObject _player)
 		{
 			_player.SetActive(false);
-			Invoke(nameof(LoadMain), 5);
+			MatchManager.instance.CallLoadMainMenu(5);
 		}
 
-		private void LoadMain() => SceneManager.LoadScene("MainMenu");
-
+		
 	}
 }

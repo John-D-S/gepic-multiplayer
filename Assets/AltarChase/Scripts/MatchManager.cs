@@ -71,8 +71,13 @@ namespace NetworkGame.Networking
         public void CallLoadMainMenu(int _seconds) => Invoke(nameof(RpcLoadMainMenu), _seconds);
 
         [ClientRpc]
-        public void RpcLoadMainMenu() => SceneManager.LoadScene("MainMenu");
-        
+        public void RpcLoadMainMenu()
+        {
+            CustomNetworkManager.Instance.StopHost();
+            //CustomNetworkManager.Instance.StopServer();
+            SceneManager.LoadScene("MainMenu");
+        }
+
 
         protected void Awake()
         {
