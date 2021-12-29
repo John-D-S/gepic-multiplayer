@@ -6,6 +6,8 @@ using Mirror;
 
 using NetworkGame.Networking;
 
+using System;
+
 using UnityEngine.SceneManagement;
 
 namespace AltarChase
@@ -17,7 +19,6 @@ namespace AltarChase
 		/// This is the Ontrigger for the exit and is running on the server.
 		/// </summary>
 		/// <param name="_collider">The collider of the player that hit the exit.</param>
-		[Server]
 		private void OnTriggerEnter(Collider _collider)
 		{
 			if(_collider.CompareTag("Player"))
@@ -26,20 +27,16 @@ namespace AltarChase
 				PlayerInteract playerInteract = identity.GetComponent<PlayerInteract>();
 				if(playerInteract.isHoldingArtifact)
 				{
-					characterName = playerInteract.characterName;
-					FindObjectOfType<Popup>().RpcPopupText($"{characterName} has escaped with the artifact");
-					RpcHidePayer(identity.gameObject);
+					CmdPlayerWinsGame(identity, playerInteract.characterName);
 				}
-				
-				if(!playerInteract.isHoldingArtifact)
-				{
-					
-					Debug.Log("You need the artifact to escape.");
-					// Put in a local player side display message.
-				}
-
 			}
-            
+		}
+		
+		[Command(requiresAuthority = false)]
+		private void CmdPlayerWinsGame(NetworkIdentity playerIdentity, string characterName)
+		{
+			FindObjectOfType<Popup>().RpcPopupText($"{characterName} has escaped with the artifact");
+			RpcHidePayer(playerIdentity.gameObject);
 		}
 
 		/// <summary>
